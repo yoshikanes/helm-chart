@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-controller-mgmt
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://oracle.github.io/oci-helm-charts
+    chart: oci-native-ingress-controller
+    targetRevision: 1.4.2
+    helm:
+      values: |
+        oci:
+          compartmentOCID: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
+          subnetOCID: "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaaslh3ctk4zlrlcvdoqm3gppvrtntr5jbdmsf4dvwsomcld2zerppq"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
