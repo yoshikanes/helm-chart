@@ -6,15 +6,15 @@ metadata:
 spec:
   project: default
   sources:
-  - repoURL: https://argoproj.github.io/argo-helm
-    chart: argo-cd
-    targetRevision: 8.0.6
-    helm:
-      valueFiles:
-        - $values/charts/infra/argocd/values.yaml
-  - repoURL: https://github.com/yoshikanes/helm-chart.git
-    targetRevision: main
-    ref: values
+    - repoURL: https://argoproj.github.io/argo-helm
+      chart: argo-cd
+      targetRevision: 8.0.6
+      helm:
+        valueFiles:
+          - $values/charts/infra/argocd/values.yaml
+    - repoURL: https://github.com/yoshikanes/helm-chart.git
+      targetRevision: main
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
