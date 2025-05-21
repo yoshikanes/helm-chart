@@ -1,4 +1,4 @@
 parameters:
   compartmentOCID: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
-  subnetOCID: "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaaslh3ctk4zlrlcvdoqm3gppvrtntr5jbdmsf4dvwsomcld2zerppq"
+  subnetOCID: "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaaf7g3sj5bhbwgxginqcx2t6dihbne2juaehi62jzpz7f7uwlu7plq"
   loadBalancerName: "ec-service-mgmt-lb"
