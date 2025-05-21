@@ -3,8 +3,8 @@ kind: IngressClassParameters
 metadata:
   name: native-ic-params
 spec:
-  compartmentId: { { .Values.parameters.compartmentOCID } }
-  subnetId: { { .Values.parameters.subnetOCID } }
+  compartmentId: {{ .Values.parameters.compartmentOCID }}
+  subnetId: {{ .Values.parameters.subnetOCID }}
   loadBalancerName: "ec-service-test-lb"
   isPrivate: false
   maxBandwidthMbps: 100
