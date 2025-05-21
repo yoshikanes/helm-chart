@@ -1,6 +1,5 @@
 server:
   ingress:
     enabled: true
-    ingressClassName: nativei-ic-ingress-class
-    hosts:
-      - argocd.mgmt.ec-gaihan-developement.com
+    ingressClassName: native-ic-ingress-class
+    hostname: argocd.mgmt.ec-gaihan-developement.com

@@ -5,7 +5,7 @@ metadata:
 spec:
   compartmentId: {{ .Values.parameters.compartmentOCID }}
   subnetId: {{ .Values.parameters.subnetOCID }}
-  loadBalancerName: "ec-service-test-lb"
+  loadBalancerName: {{ .Values.parameters.loadBalancerName }}
   isPrivate: false
   maxBandwidthMbps: 100
   minBandwidthMbps: 10
