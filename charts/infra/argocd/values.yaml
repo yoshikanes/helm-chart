@@ -2,7 +2,7 @@ server:
   ingress:
     enabled: true
     annotations:
-      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
+      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTPS"
       oci-native-ingress.oraclecloud.com/healthcheck-port: "8080"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
     ingressClassName: native-ic-ingress-class
