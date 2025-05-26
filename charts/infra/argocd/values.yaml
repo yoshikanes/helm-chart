@@ -5,5 +5,7 @@ server:
       oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
       oci-native-ingress.oraclecloud.com/healthcheck-port: "8080"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
+      cert-manager.io/cluster-issuer: cluster-issuer
     ingressClassName: native-ic-ingress-class
     hostname: argocd.mgmt.ec-gaihan-development.com
+    tls: true
