@@ -6,4 +6,4 @@ server:
       oci-native-ingress.oraclecloud.com/healthcheck-port: "8080"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
     ingressClassName: native-ic-ingress-class
-    hostname: argocd.mgmt.ec-gaihan-developement.com
+    hostname: argocd.mgmt.ec-gaihan-development.com
