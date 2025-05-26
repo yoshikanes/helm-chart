@@ -7,3 +7,4 @@ server:
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
     ingressClassName: native-ic-ingress-class
     hostname: argocd.mgmt.ec-gaihan-development.com
+    tls: true
