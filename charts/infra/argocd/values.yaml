@@ -10,10 +10,10 @@ server:
     hostname: argocd.mgmt.ec-gaihan-development.com
     tls: true
     extraRules:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: argocd-server
-                port:
-                  number: 80
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 80
