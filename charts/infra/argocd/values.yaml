@@ -9,3 +9,14 @@ server:
     ingressClassName: native-ic-ingress-class
     hostname: argocd.mgmt.ec-gaihan-development.com
     tls: true
+    extraRules:
+      - host: argocd.mgmt.ec-gaihan-development.com
+        http:
+          paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: argocd-server
+                port:
+                  number: 80
