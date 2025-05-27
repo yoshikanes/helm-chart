@@ -8,6 +8,7 @@ server:
       cert-manager.io/cluster-issuer: cluster-issuer
     ingressClassName: native-ic-ingress-class
     hostname: argocd.mgmt.ec-gaihan-development.com
+    tls: true
     extraRules:
       - http:
           paths:
