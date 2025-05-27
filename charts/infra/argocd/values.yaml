@@ -19,3 +19,7 @@ server:
                 name: argocd-server
                 port:
                   number: 80
+    extraTls:
+      - hosts:
+          - argocd.mgmt.ec-gaihan-development.com
+        secretName: argocd-server-tls-pkmnv
