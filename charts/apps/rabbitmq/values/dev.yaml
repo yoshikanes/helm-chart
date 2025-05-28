@@ -14,8 +14,10 @@ deployment:
 service:
     name: rabbitmq
     ports:
+        mainPortName: main
         mainPort: 80
         mainTargetPort: 15672
+        subPortName: sub
         subPort: 5672
         subTargetPort: 5672
 selector:

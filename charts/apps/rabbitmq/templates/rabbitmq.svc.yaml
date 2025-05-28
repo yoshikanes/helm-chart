@@ -7,9 +7,11 @@ metadata:
   namespace: microservices
 spec:
   ports:
-    - port: {{ .Values.service.ports.subPort }}
+    - name: {{ .Values.service.ports.subPortName }}
+      port: {{ .Values.service.ports.subPort }}
       targetPort: {{ .Values.service.ports.subTargetPort }}
-    - port: {{ .Values.service.ports.mainPort }}
+    - name: {{ .Values.service.ports.mainPortName }}
+      port: {{ .Values.service.ports.mainPort }}
       targetPort: {{ .Values.service.ports.mainTargetPort }}
   selector:
     app: {{ .Values.selector.app }}
