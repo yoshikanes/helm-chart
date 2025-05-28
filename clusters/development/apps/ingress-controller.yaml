@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-controller-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/oracle/oci-native-ingress-controller.git
+    targetRevision: v1.4.2
+    path: helm/oci-native-ingress-controller
+    helm:
+      releaseName: oci-native-ingress-controller
+      values: |
+        compartment_id: "ocid1.compartment.oc1..aaaaaaaat34dbqqstzlkz4apgguqhnvna5crdcgenkd4hsjjl3cdtr7wl5fq"
+        subnet_id: "ocid1.subnet.oc1.ap-tokyo-1.aaaaaaaad72zzofvywqzrnrtstembgwbzwvufinvkx3shndv5c43narzpudq"
+        cluster_id: "ocid1.cluster.oc1.ap-tokyo-1.aaaaaaaa3xm2cwq2clksukvbf35fkxoz4mhhok3xnenwzbtgqcwnqw52ysxa"
+  destination:
+    server: https://152.70.103.225:6443
+    namespace: native-ingress-controller-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
