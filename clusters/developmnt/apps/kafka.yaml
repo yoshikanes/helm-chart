@@ -1,23 +1,25 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ingress-bootstrap-dev
+  name: kafka
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
-  destination:
-    server: https://152.70.103.225:6443
-    namespace: default
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
-    path: charts/networking/ingress-bootstrap
     targetRevision: main
+    path: charts/apps/kafka
     helm:
       valueFiles:
         - values/dev.yaml
+  destination:
+    server: https://152.70.103.225:6443
+    namespace: microservices
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
     syncOptions:
       - CreateNamespace=true

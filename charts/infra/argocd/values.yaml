@@ -6,6 +6,6 @@ server:
     annotations:
       oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
-      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
+      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeian3iv6jxk3po2k2n6itdiqah2qoo4ui5shxjtfo5kciua"
     ingressClassName: native-ic-ingress-class
     hostname: argocd.mgmt.ec-gaihan-development.com

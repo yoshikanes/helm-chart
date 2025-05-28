@@ -2,7 +2,7 @@ deployment:
     name: kafka-ui
     replicaCount: 1
     env:
-        clustersBootstrapServers: kafka-service:9092
+        clustersBootstrapServers: kafka:9092
         clustersName: local
     image:
         name: provectuslabs/kafka-ui

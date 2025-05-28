@@ -13,7 +13,7 @@ deployment:
         containerPort: 9092
         protocol: TCP
 service:
-    name: kafka-service
+    name: kafka
     ports:
         port: 9092
         targetPort: 9092
