@@ -2,31 +2,31 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .dev.selector.app }}
-  name: {{ .dev.deployment.name }}
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.deployment.name }}
   namespace: microservices
 spec:
-  replicas: {{ .dev.deployment.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .dev.selector.app }}
+      app: {{ .Values.selector.app }}
   template:
     metadata:
       labels:
-        app: {{ .dev.selector.app }}
+        app: {{ .Values.selector.app }}
     spec:
       containers:
         - env:
             - name: KAFKA_BROKER_ID
-              value: {{ .dev.deployment.env.brokerId | quote }}
+              value: {{ .Values.deployment.env.brokerId | quote }}
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: {{ .dev.deployment.env.advertisedListeners }}
+              value: {{ .Values.deployment.env.advertisedListeners }}
             - name: KAFKA_ZOOKEEPER_CONNECT
-              value: {{ .dev.deployment.env.zookeeperConnect }}
+              value: {{ .Values.deployment.env.zookeeperConnect }}
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
-              value: {{ .dev.deployment.env.offsetsTopicReplicationFactor | quote }}
-          image: {{ .dev.deployment.image.name }}:{{ .dev.deployment.image.tag }}
-          name: {{ .dev.deployment.name }}
+              value: {{ .Values.deployment.env.offsetsTopicReplicationFactor | quote }}
+          image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
+          name: {{ .Values.deployment.name }}
           ports:
-            - containerPort: {{ .dev.deployment.ports.containerPort }}
-              protocol: {{ .dev.deployment.ports.protocol }}
+            - containerPort: {{ .Values.deployment.ports.containerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}

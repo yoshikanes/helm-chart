@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .dev.selector.app }}
-  name: {{ .dev.deployment.name }}
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.deployment.name }}
   namespace: microservices
 spec:
-  replicas: {{ .dev.deployment.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .dev.selector.app }}
+      app: {{ .Values.selector.app }}
   template:
     metadata:
       labels:
-        app: {{ .dev.selector.app }}
+        app: {{ .Values.selector.app }}
     spec:
       containers:
-        - image: {{ .dev.deployment.image.name }}
-          name: {{ .dev.deployment.name }}
+        - image: {{ .Values.deployment.image.name }}
+          name: {{ .Values.deployment.name }}
           ports:
-            - containerPort: {{ .dev.deployment.ports.containerPort }}
-              protocol: {{ .dev.deployment.ports.protocol }}
+            - containerPort: {{ .Values.deployment.ports.containerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}

@@ -2,33 +2,33 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .dev.selector.app }}
-  name: {{ .dev.deployment.name }}
+    app: {{ .Values.selector.app }}
+  name: {{ .Values.deployment.name }}
   namespace: microservices
 spec:
-  replicas: {{ .dev.deployment.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .dev.selector.app }}
+      app: {{ .Values.selector.app }}
   template:
     metadata:
       labels:
-        app: {{ .dev.selector.app }}
+        app: {{ .Values.selector.app }}
     spec:
       containers:
         - env:
             - name: DB
-              value: {{ .dev.deployment.env.db }}
+              value: {{ .Values.deployment.env.db }}
             - name: DB_PORT
-              value: {{ .dev.deployment.env.dbPort | quote }}
+              value: {{ .Values.deployment.env.dbPort | quote }}
             - name: POSTGRES_PWD
-              value: {{ .dev.deployment.env.postgresPwd }}
+              value: {{ .Values.deployment.env.postgresPwd }}
             - name: POSTGRES_SEEDS
-              value: {{ .dev.deployment.env.postgresSeeds }}
+              value: {{ .Values.deployment.env.postgresSeeds }}
             - name: POSTGRES_USER
-              value: {{ .dev.deployment.env.postgresUser }}
-          image: {{ .dev.deployment.image.name }}:{{ .dev.deployment.image.tag }}
-          name: {{ .dev.deployment.name }}
+              value: {{ .Values.deployment.env.postgresUser }}
+          image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
+          name: {{ .Values.deployment.name }}
           ports:
-            - containerPort: {{ .dev.deployment.ports.containerPort }}
-              protocol: {{ .dev.deployment.ports.protocol }}
+            - containerPort: {{ .Values.deployment.ports.containerPort }}
+              protocol: {{ .Values.deployment.ports.protocol }}
