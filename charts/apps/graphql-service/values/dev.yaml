@@ -9,7 +9,7 @@ deployment:
 service:
     name: graphql-service
     ports:
-        port: 80
+        port: 443
         targetPort: 80
 selector:
     app: graphql-service
