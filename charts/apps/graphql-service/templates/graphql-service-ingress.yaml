@@ -8,6 +8,7 @@ metadata:
     oci-native-ingress.oraclecloud.com/healthcheck-port: {{ .Values.ingress.annotations.healthCheckPort | quote }}
     oci-native-ingress.oraclecloud.com/healthcheck-path: {{ .Values.ingress.annotations.healthCheckPath }}
     oci-native-ingress.oraclecloud.com/certificate-ocid: {{ .Values.ingress.annotations.certificateOCID }}
+    oci-native-ingress.oraclecloud.com/backend-tls-enabled: {{ .Values.ingress.annotations.backendTLSEnabled }}
 spec:
     ingressClassName: {{ .Values.ingress.ingressClassName }}
     rules:

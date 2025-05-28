@@ -9,7 +9,7 @@ deployment:
 service:
     name: graphql-service
     ports:
-        port: 443
+        port: 80
         targetPort: 80
 selector:
     app: graphql-service
@@ -20,6 +20,7 @@ ingress:
         healthCheckPort: "80"
         healthCheckPath: "/ui"
         certificateOCID: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
+        backendTLSEnabled: "false"
     ingressClassName: native-ic-ingress-class
     rules:
         hostName: graphql.dev.ec-gaihan-development.com
