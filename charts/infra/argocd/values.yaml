@@ -1,6 +1,8 @@
+configs:
+  cm:
+    url: "https://argocd.mgmt.ec-gaihan-development.com"
+
 server:
-  config:
-    url: https://argocd.mgmt.ec-gaihan-development.com
   ingress:
     enabled: true
     annotations:
