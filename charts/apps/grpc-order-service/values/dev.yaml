@@ -1,0 +1,15 @@
+deployment:
+    name: grpc-order-service
+    replicaCount: 1
+    image:
+        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:grpc-order-service
+    ports:
+        containerPort: 50053
+        protocol: TCP
+service:
+    name: grpc-order-service
+    ports:
+        port: 50053
+        targetPort: 50053
+selector:
+    app: grpc-order-service

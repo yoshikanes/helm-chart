@@ -1,0 +1,20 @@
+deployment:
+    name: temporal-ui
+    replicaCount: 1
+    env:
+        temporalAddress: temporal:7233
+        temporalUiPort: 8080
+        temporalUiPublicPath: /temporal
+    image:
+        name: temporalio/ui
+        tag: 2.36.1
+    ports:
+        containerPort: 8080
+        protocol: TCP
+service:
+    name: temporal-ui
+    ports:
+        port: 80
+        targetPort: 8080
+selector:
+    app: temporal-ui

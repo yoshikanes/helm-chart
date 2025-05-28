@@ -1,0 +1,22 @@
+deployment:
+    name: rabbitmq
+    replicaCount: 1
+    env:
+        defaultPass: pass
+        defaultUser: user
+    image:
+        name: rabbitmq
+        tag: 4.1.0-beta.5-management
+    ports:
+        mainContainerPort: 15672
+        subContainerPort: 5672
+        protocol: TCP
+service:
+    name: rabbitmq
+    ports:
+        mainPort: 80
+        mainTargetPort: 15672
+        subPort: 5672
+        subTargetPort: 5672
+selector:
+    app: rabbitmq

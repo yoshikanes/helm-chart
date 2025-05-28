@@ -1,0 +1,7 @@
+persistentvolumeclaim:
+  name: microservice-db-data
+  accessModes: ReadWriteOnce
+  resources:
+    storage: 100Mi
+selector:
+  app: microservice-db-data

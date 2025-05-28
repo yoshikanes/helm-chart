@@ -1,0 +1,15 @@
+deployment:
+    name: grpc-payment-service
+    replicaCount: 1
+    image:
+        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:grpc-payment-service
+    ports:
+        containerPort: 50054
+        protocol: TCP
+service:
+    name: grpc-payment-service
+    ports:
+        port: 50054
+        targetPort: 50054
+selector:
+    app: grpc-payment-service

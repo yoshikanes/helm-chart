@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .dev.selector.app }}
+  name: {{ .dev.deployment.name }}
+  namespace: microservices
+spec:
+  replicas: {{ .dev.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .dev.selector.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .dev.selector.app }}
+    spec:
+      containers:
+        - env:
+            - name: KAFKA_BROKER_ID
+              value: {{ .dev.deployment.env.brokerId | quote }}
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: {{ .dev.deployment.env.advertisedListeners }}
+            - name: KAFKA_ZOOKEEPER_CONNECT
+              value: {{ .dev.deployment.env.zookeeperConnect }}
+            - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
+              value: {{ .dev.deployment.env.offsetsTopicReplicationFactor | quote }}
+          image: {{ .dev.deployment.image.name }}:{{ .dev.deployment.image.tag }}
+          name: {{ .dev.deployment.name }}
+          ports:
+            - containerPort: {{ .dev.deployment.ports.containerPort }}
+              protocol: {{ .dev.deployment.ports.protocol }}

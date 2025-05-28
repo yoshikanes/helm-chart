@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .dev.selector.app }}
+  name: {{ .dev.deployment.name }}
+  namespace: microservices
+spec:
+  replicas: {{ .dev.deployment.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .dev.selector.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .dev.selector.app }}
+    spec:
+      containers:
+        - env:
+            - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+              value: {{ .dev.deployment.env.clustersBootstrapServers }}
+            - name: KAFKA_CLUSTERS_0_NAME
+              value: {{ .dev.deployment.env.clustersName }}
+          image: {{ .dev.deployment.image.name }}:{{ .dev.deployment.image.tag }}
+          name: {{ .dev.deployment.name }}
+          ports:
+            - containerPort: {{ .dev.deployment.ports.containerPort }}
+              protocol: {{ .dev.deployment.ports.protocol }}

@@ -1,0 +1,18 @@
+deployment:
+    name: kafka-api
+    replicaCount: 1
+    env:
+        appPort: 8001
+        bootstrapServers: kafka:9092
+    image:
+        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-api-v2
+    ports:
+        containerPort: 8001
+        protocol: TCP
+service:
+    name: kafka-api
+    ports:
+        port: 8001
+        targetPort: 8001
+selector:
+    app: kafka-api

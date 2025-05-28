@@ -1,0 +1,22 @@
+deployment:
+    name: temporal
+    replicaCount: 1
+    env:
+        db: postgres12
+        dbPort: 5432
+        postgresPwd: temporal
+        postgresSeeds: temporal-db
+        postgresUser: temporal
+    image:
+        name: temporalio/auto-setup
+        tag: 1.27.2
+    ports:
+        containerPort: 7233
+        protocol: TCP
+service:
+    name: temporal
+    ports:
+        port: 7233
+        targetPort: 7233
+selector:
+    app: temporal

@@ -1,0 +1,25 @@
+deployment:
+    name: temporal-db
+    replicaCount: 1
+    strategy:
+        type: Recreate
+    env:
+        postgresPassword: temporal
+        postgresUser: temporal
+        pgdata: /var/lib/postgresql/data/db
+    image:
+        name: postgres
+        tag: 17.4
+    volumeMounts:
+        mountPath: /var/lib/postgresql/data
+        name: temporal-pgdata
+    volumes:
+        name: temporal-pgdata
+        claimName: temporal-pgdata
+service:
+    name: temporal-db
+    ports:
+        port: 5432
+        targetPort: 5432
+selector:
+    app: temporal-db

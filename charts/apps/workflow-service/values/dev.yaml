@@ -1,0 +1,17 @@
+deployment:
+    name: workflow-service
+    replicaCount: 1
+    env:
+        temporalAddress: temporal:7233
+    image:
+        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:workflow-service
+    ports:
+        containerPort: 50060
+        protocol: TCP
+service:
+    name: workflow-service
+    ports:
+        port: 50060
+        targetPort: 50060
+selector:
+    app: workflow-service

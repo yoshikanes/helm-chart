@@ -1,0 +1,21 @@
+deployment:
+    name: kafka
+    replicaCount: 1
+    env:
+        brokerId: 1
+        advertisedListeners: PLAINTEXT://kafka.microservices.svc.cluster.local:9092
+        zookeeperConnect: zookeeper:2181
+        offsetsTopicReplicationFactor: 1
+    image:
+        name: confluentinc/cp-kafka
+        tag: 7.9.1
+    ports:
+        containerPort: 9092
+        protocol: TCP
+service:
+    name: kafka
+    ports:
+        port: 9092
+        targetPort: 9092
+selector:
+    app: kafka

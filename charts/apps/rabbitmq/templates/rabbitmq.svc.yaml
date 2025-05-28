@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .dev.selector.app }}
+  name: {{ .dev.service.name }}
+  namespace: microservices
+spec:
+  ports:
+    - port: {{ .dev.service.ports.subPort }}
+      targetPort: {{ .dev.service.ports.subTargetPort }}
+    - port: {{ .dev.service.ports.mainPort }}
+      targetPort: {{ .dev.service.ports.mainTargetPort }}
+  selector:
+    app: {{ .dev.selector.app }}

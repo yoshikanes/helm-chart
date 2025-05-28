@@ -1,0 +1,18 @@
+deployment:
+    name: zookeeper
+    replicaCount: 1
+    env:
+        clientPort: 2181
+    image:
+        name: zookeeper
+        tag: 3.6
+    ports:
+        containerPort: 2181
+        protocol: TCP
+service:
+    name: zookeeper
+    ports:
+        port: 2181
+        targetPort: 2181
+selector:
+    app: zookeeper

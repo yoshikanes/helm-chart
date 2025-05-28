@@ -1,0 +1,7 @@
+persistentvolumeclaim:
+  name: temporal-pgdata
+  accessModes: ReadWriteOnce
+  resources:
+    storage: 100Mi
+selector:
+  app: temporal-pgdata

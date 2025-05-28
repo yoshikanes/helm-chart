@@ -1,0 +1,29 @@
+deployment:
+    name: microservice-db
+    replicaCount: 1
+    strategy:
+        type: Recreate
+    env:
+        db: appdb
+        password: apppass
+        user: appuser
+        pgdata: /var/lib/postgresql/data/db
+    image:
+        name: postgres
+        tag: 17.4
+    ports:
+        containerPort: 5432
+        protocol: TCP
+    volumeMounts:
+        mountPath: /var/lib/postgresql/data
+        name: microservice-db-data
+    volumes:
+        name: microservice-db-data
+        claimName: microservice-db-data
+service:
+    name: microservice-db
+    ports:
+        port: 5432
+        targetPort: 5432
+selector:
+    app: microservice-db

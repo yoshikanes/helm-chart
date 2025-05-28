@@ -1,0 +1,19 @@
+deployment:
+    name: kafka-ui
+    replicaCount: 1
+    env:
+        clustersBootstrapServers: kafka:9092
+        clustersName: local
+    image:
+        name: provectuslabs/kafka-ui
+        tag: latest
+    ports:
+        containerPort: 8080
+        protocol: TCP
+service:
+    name: kafka-ui
+    ports:
+        port: 80
+        targetPort: 8080
+selector:
+    app: kafka-ui
