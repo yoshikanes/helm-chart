@@ -2,7 +2,7 @@ deployment:
     name: kafka-worker
     replicaCount: 2
     env:
-        bootstrapServers: kafka:9092
+        bootstrapServers: kafka-service:9092
     image:
         name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-worker
 service:

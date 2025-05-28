@@ -1,16 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kafka-api
+  name: kafka
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
-    path: charts/apps/kafka-api
+    path: charts/apps/kafka
     helm:
       valueFiles:
         - values/dev.yaml
