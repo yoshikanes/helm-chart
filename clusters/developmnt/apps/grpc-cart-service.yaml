@@ -13,7 +13,7 @@ spec:
       valueFiles:
         - values/dev.yaml
   destination:
-    server: https://dev.k8s.example.com
+    server: https://152.70.103.225:6443
     namespace: microservices
   syncPolicy:
     automated:
