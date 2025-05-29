@@ -21,8 +21,6 @@ spec:
               value: {{ .Values.deployment.env.temporalAddress }}
             - name: TEMPORAL_UI_PORT
               value: {{ .Values.deployment.env.temporalUiPort | quote }}
-            - name: TEMPORAL_UI_PUBLIC_PATH
-              value: {{ .Values.deployment.env.temporalUiPublicPath }}
           image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
           name: {{ .Values.deployment.name }}
           ports:

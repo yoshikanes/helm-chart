@@ -4,7 +4,6 @@ deployment:
     env:
         temporalAddress: temporal:7233
         temporalUiPort: 8080
-        temporalUiPublicPath: /temporal
     image:
         name: temporalio/ui
         tag: 2.36.1
@@ -18,3 +17,17 @@ service:
         targetPort: 8080
 selector:
     app: temporal-ui
+ingress:
+    name: temporal-ingress
+    annotations:
+        healthCheckProtocol: "HTTP"
+        healthCheckPort: "8080"
+        healthCheckPath: "/"
+        certificateOCID: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
+        backendTLSEnabled: "false"
+        httpsListenerPort: "443"
+    ingressClassName: native-ic-ingress-class
+    rules:
+        hostName: temporal.dev.ec-gaihan-development.com
+        path: /
+        pathType: Prefix
