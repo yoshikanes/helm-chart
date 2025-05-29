@@ -3,7 +3,7 @@ deployment:
     replicaCount: 1
     env:
         brokerId: 1
-        advertisedListeners: PLAINTEXT://kafka.microservices.svc.cluster.local:9092
+        advertisedListeners: PLAINTEXT://kafka-service.microservices.svc.cluster.local:9092
         zookeeperConnect: zookeeper:2181
         offsetsTopicReplicationFactor: 1
     image:
