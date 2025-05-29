@@ -8,7 +8,7 @@ spec:
   sources:
     - repoURL: https://istio-release.storage.googleapis.com/charts
       chart: gateway
-      targetRevision: 1.24.0
+      targetRevision: 1.25.0
   destination:
     server: https://152.70.103.225:6443
     namespace: istio-system
