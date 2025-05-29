@@ -12,7 +12,7 @@ deployment:
 service:
     name: kafka-api
     ports:
-        port: 80
+        port: 8001
         targetPort: 8001
 selector:
     app: kafka-api
