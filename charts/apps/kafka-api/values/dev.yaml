@@ -12,7 +12,21 @@ deployment:
 service:
     name: kafka-api
     ports:
-        port: 8001
+        port: 80
         targetPort: 8001
 selector:
     app: kafka-api
+ingress:
+    name: kafka-api-ingress
+    annotations:
+        healthCheckProtocol: "HTTP"
+        healthCheckPort: "8001"
+        healthCheckPath: "/"
+        certificateOCID: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
+        backendTLSEnabled: "false"
+        httpsListenerPort: "443"
+    ingressClassName: native-ic-ingress-class
+    rules:
+        hostName: kafka-api.dev.ec-gaihan-development.com
+        path: /
+        pathType: Prefix
