@@ -10,7 +10,7 @@ spec:
       chart: istiod
       targetRevision: 1.25.0
   destination:
-    server: https://152.70.103.225:6443
+    server: https://kubernetes.default.svc
     namespace: istio-system
   syncPolicy:
     automated:

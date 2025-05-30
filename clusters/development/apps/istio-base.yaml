@@ -16,7 +16,7 @@ spec:
       targetRevision: main
       ref: values
   destination:
-    server: https://152.70.103.225:6443
+    server: https://kubernetes.default.svc
     namespace: istio-system
   syncPolicy:
     automated:
