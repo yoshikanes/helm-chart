@@ -5,7 +5,7 @@ deployment:
         appPort: 8001
         bootstrapServers: kafka-service:9092
     image:
-        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-api-v4
+        name: nrt.ocir.io/nrcmxxv7sjse/ec_service_test:kafka-api-v5
     ports:
         containerPort: 8001
         protocol: TCP
