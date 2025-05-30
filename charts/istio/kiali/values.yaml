@@ -14,5 +14,7 @@ cr:
   name: kiali
   namespace: istio-system
   spec:
+    auth:
+      strategy: anonymous
     deployment:
       cluster_wide_access: true
