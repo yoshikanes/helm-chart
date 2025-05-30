@@ -1,0 +1,18 @@
+kiali:
+  auth:
+    strategy: "anonymous"
+  deployment:
+    namespace: istio-system
+
+  ingress:
+    enabled: false  # Ingress無効化
+  route:
+    enabled: false  # Route無効化（OpenShiftのみ）
+
+cr:
+  create: true   # これがUI起動の鍵です
+  name: kiali
+  namespace: istio-system
+  spec:
+    deployment:
+      cluster_wide_access: true
