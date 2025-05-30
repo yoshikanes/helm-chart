@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kiali
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://kiali.org/helm-charts
+      chart: kiali-operator
+      targetRevision: 2.10.0
+  destination:
+    server: https://152.70.103.225:6443
+    namespace: istio-system
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
