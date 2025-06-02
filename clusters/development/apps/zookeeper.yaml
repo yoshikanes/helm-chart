@@ -16,6 +16,9 @@ spec:
     server: https://152.70.103.225:6443
     namespace: microservices
   syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        istio-injection: enabled
     automated:
       selfHeal: true
       prune: true
