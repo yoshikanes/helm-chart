@@ -9,6 +9,12 @@ spec:
     - repoURL: https://istio-release.storage.googleapis.com/charts
       chart: istiod
       targetRevision: 1.25.0
+      helm:
+        valueFiles:
+          - $values/charts/istio/istiod/values.yaml
+    - repoURL: https://github.com/yoshikanes/helm-chart.git
+      targetRevision: main
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: istio-system
