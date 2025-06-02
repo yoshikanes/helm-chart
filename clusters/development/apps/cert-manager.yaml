@@ -13,6 +13,8 @@ spec:
       parameters:
         - name: installCRDs
           value: "true"
+        - name: featureGates
+          value: "ExperimentalCertificateSigningRequestControllers=true"
   destination:
     server: https://152.70.103.225:6443
     namespace: cert-manager
