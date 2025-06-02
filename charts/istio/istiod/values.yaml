@@ -1,3 +1,2 @@
-webhooks:
-  - name: validation.istio.io
-    failurePolicy: Ignore
+base:
+  validationCABundle: "dummy-non-empty-string"
