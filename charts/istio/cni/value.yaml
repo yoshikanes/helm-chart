@@ -1,0 +1,35 @@
+cni:
+  enabled: true
+
+# 使用するCNIバイナリ・設定ファイルのディレクトリ（OKE向け）
+  cniBinDir: /opt/cni/bin
+  cniConfDir: /etc/cni/net.d
+  
+  
+  # チェインモードの無効化（OKEでは通常 false）
+  chained: false
+  
+  # 対象外ネームスペース（istio-systemとkube-systemは必須）
+  excludeNamespaces:
+    - cert-manager
+    - default
+    - istio-system
+    - kube-node-lease
+    - kube-public
+    - kube-system
+    - monitoring
+    - native-ingress-controller-system
+  
+  # ログレベル
+  logging:
+    level: info
+  
+    # istio-cni DaemonSetのPodに割り当てるリソース。
+    # 環境の規模に応じて調整してください。
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
