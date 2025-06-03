@@ -11,14 +11,8 @@ cni:
   
   # 対象外ネームスペース（istio-systemとkube-systemは必須）
   excludeNamespaces:
-    - cert-manager
-    - default
     - istio-system
     - kube-node-lease
-    - kube-public
-    - kube-system
-    - monitoring
-    - native-ingress-controller-system
   
   # ログレベル
   logging:
