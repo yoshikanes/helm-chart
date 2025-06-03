@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cni-dev
+  name: istio-cni-dev
   namespace: argocd
 spec:
   project: default
