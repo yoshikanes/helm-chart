@@ -7,8 +7,6 @@ spec:
   generators:
     - list:
         elements:
-          - cluster: mgmt
-            url: https://kubernetes.default.svc
           - cluster: dev
             url: https://152.70.103.225:6443
   template:
