@@ -19,6 +19,7 @@ spec:
     managedNamespaceMetadata:
       labels:
         istio-injection: enabled
+        pod-security.kubernetes.io/enforce: privileged
     automated:
       selfHeal: true
       prune: true
