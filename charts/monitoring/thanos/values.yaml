@@ -1,3 +1,9 @@
+objstoreConfig:
+  type: OCI
+  config:
+    provider: "instance-principal"
+    bucket: "thanos-metrics-storage"
+    compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
 query:
   logLevel: debug
   stores:
@@ -7,9 +13,3 @@ query:
 storegateway:
   enabled: true
   logLevel: debug
-  config:
-    type: OCI
-    config:
-      provider: "instance-principal"
-      bucket: "thanos-metrics-storage"
-      compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
