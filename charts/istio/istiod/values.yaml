@@ -1,5 +1,5 @@
 cni:
   enabled: true
 webhooks:
-  - name: validation.istio.io
+  - name: rev.validation.istio.io
     failurePolicy: fail
