@@ -16,7 +16,7 @@ grafana:
 prometheus:
   prometheusSpec:
     externalLabels:
-      cluster: development
+      cluster: management
     thanos:
       image: quay.io/thanos/thanos:v0.38.0
       version: v0.38.0
