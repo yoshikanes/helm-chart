@@ -1,66 +1,23 @@
-nameOverride: ""
-fullnameOverride: ""
+# この内容をArgo CDのvaluesに設定してください。
+# Argo CDのApplicationマニフェストの spec.source.helm.values に直接記述するか、
+# この内容でvalues.yamlファイルを作成して参照させます。
 
-image:
-  repo: quay.io/kiali/kiali-operator
-  tag: v1.22.0
-  pullPolicy: Always
-  pullSecrets: []
+# 'kiali:' というキーで、IstioチャートにKialiサブチャート用の設定を渡します
+kiali:
+  # Kialiコンポーネントを有効化します
+  enabled: true
 
-# Deployment options for the operator pod.
-nodeSelector: {}
-podAnnotations: {}
-tolerations: []
-resources: {}
-affinity: {}
-replicaCount: 1
-priorityClassName: ""
-
-# metrics.enabled: set to true if you want Prometheus to collect metrics from the operator
-metrics:
-  enabled: true
-
-# debug.enabled: when true the full ansible logs are dumped after each reconciliation run
-# debug.verbosity: defines the amount of details the operator will log (higher numbers are more noisy)
-debug:
-  enabled: true
-  verbosity: "1"
-
-# Defines where the operator will look for Kial CR resources. "" means "all namespaces".
-watchNamespace: ""
-
-# Set to true if you want the operator to be able to create cluster roles. This is necessary
-# if you want to support Kiali CRs with spec.deployment.accessible_namespaces of '**'.
-# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.accessible_namespaces is ['**'].
-clusterRoleCreator: true
-
-# Set to true if you want to allow the operator to only be able to install Kiali in view-only-mode.
-# The purpose for this setting is to allow you to restrict the permissions given to the operator itself.
-onlyViewOnlyMode: false
-
-# For what a Kiali CR spec can look like, see:
-# https://github.com/kiali/kiali-operator/blob/master/deploy/kiali/kiali_cr.yaml
-cr:
-  # ▼▼▼ 変更点 1 ▼▼▼
-  # Kialiカスタムリソースをこのチャートで作成・管理するように 'true' に変更します。
-  create: true
-  name: kiali
-
-  # ▼▼▼ 変更点 2 ▼▼▼
-  # Kialiをインストールする名前空間を指定します (例: istio-system)。
-  # ご自身の環境に合わせて設定してください。
-  namespace: "istio-system"
-
-  spec:
-    # ▼▼▼ 追記点 3 ▼▼▼
-    # 外部サービス (Prometheus) の設定を追記します。
+  # Kialiダッシュボードの設定
+  dashboard:
+    # 外部サービスとしてPrometheusを指定します
+    # (ご提示のファイルにあった追記点3に相当します)
+    # ※お使いのIstioのバージョンによってはキー名が異なる可能性があります
     external_services:
       prometheus:
-        # 'monitoring' ネームスペースにあるPrometheusのURLを指定します。
-        # (サービス名はご自身の環境に合わせて修正してください)
+        # ご自身の環境のPrometheusのURL
         url: "http://dev-kube-prometheus-stack-prometheus.monitoring:9090"
 
-    # --- ここからは既存の設定 ---
-    deployment:
-      accessible_namespaces:
-      - '**'
+  # Kialiが監視する名前空間を指定します
+  deployment:
+    accessible_namespaces:
+      - "**"
