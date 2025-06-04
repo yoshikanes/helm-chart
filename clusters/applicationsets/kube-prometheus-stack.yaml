@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: mgmt
+            url: https://kubernetes.default.svc
+          - cluster: dev
+            url: https://152.70.103.225:6443
+  template:
+    metadata:
+      name: '{{cluster}}-kube-prometheus-stack'
+    spec:
+      project: default
+      sources:
+        - repoURL: https://prometheus-community.github.io/helm-charts
+          chart: kube-prometheus-stack
+          targetRevision: 72.9.1
+          helm:
+            valueFiles:
+              - $values/charts/monitoring/kube-prometheus-stack/values-{{cluster}}.yaml
+        - repoURL: https://github.com/yoshikanes/helm-chart.git
+          targetRevision: main
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: monitoring
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
