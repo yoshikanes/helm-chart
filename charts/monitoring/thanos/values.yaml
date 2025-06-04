@@ -1,0 +1,15 @@
+query:
+  logLevel: debug
+  stores:
+    - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
+    - "dnssrv+_grpc._tcp.dev-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
+    - "dnssrv+_grpc._tcp.thanos-store.monitoring.svc.cluster.local"
+storegateway:
+  enabled: true
+  logLevel: debug
+  config:
+    type: OCI
+    config:
+      provider: "instance-principal"
+      bucket: "thanos-metrics-storage"
+      compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
