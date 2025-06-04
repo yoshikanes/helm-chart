@@ -1,5 +1,9 @@
 cni:
-  enabled: true
+  enabled: false
+  provider: default
+istio_cni:
+  chained: true
+  provider: default
 webhooks:
   - name: rev.validation.istio.io
     failurePolicy: fail
