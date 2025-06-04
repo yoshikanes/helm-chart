@@ -23,6 +23,9 @@ spec:
           helm:
             valueFiles:
               - $values/charts/monitoring/prometheus/values-{{cluster}}.yaml
+        - repoURL: https://github.com/yoshikanes/helm-chart.git
+          targetRevision: main
+          ref: values
       destination:
         server: '{{url}}'
         namespace: monitoring
