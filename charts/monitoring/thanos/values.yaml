@@ -9,7 +9,6 @@ query:
   stores:
     - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
     - "dnssrv+_grpc._tcp.dev-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
-    - "dnssrv+_grpc._tcp.thanos-store.monitoring.svc.cluster.local"
 storegateway:
   enabled: true
   logLevel: debug
