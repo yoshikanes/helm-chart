@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
-    path: charts/apps/workflow-service
+    path: charts/applications/workflow-service
     helm:
       valueFiles:
         - values/dev.yaml

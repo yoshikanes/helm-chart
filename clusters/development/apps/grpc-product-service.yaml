@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
-    path: charts/apps/grpc-product-service
+    path: charts/applications/grpc-product-service
     helm:
       valueFiles:
         - values/dev.yaml

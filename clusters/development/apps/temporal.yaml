@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
-    path: charts/apps/temporal
+    path: charts/applications/temporal
     helm:
       valueFiles:
         - values/dev.yaml
