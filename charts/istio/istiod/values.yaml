@@ -1,5 +1,5 @@
 cni:
-  enabled: false
+  enabled: true
   provider: default
 istio_cni:
   chained: true
