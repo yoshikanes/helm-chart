@@ -1,6 +1,7 @@
 # helm-chart
 
-.
+## ディレクトリ構成
+/
 ├── charts  # Helmチャートのルートディレクトリ
 │   ├── applications  # ビジネスアプリケーションのチャート
 └── clusters  # Argo CDのApplicationマニフェスト
