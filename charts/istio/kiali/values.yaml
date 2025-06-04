@@ -1,29 +1,66 @@
-kiali:
-  deployment:
-    namespace: istio-system
-  ingress:
-    enabled: true
-    hosts:
-      - "istio.dev.ec-gaihan-development.com"
-    annotations:
-      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
-      oci-native-ingress.oraclecloud.com/healthcheck-port: "20001"
-      oci-native-ingress.oraclecloud.com/healthcheck-path: "/kiali/healthz"
-      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
-      oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
-      oci-native-ingress.oraclecloud.com/https-listener-port: "443"
-    ingressClassName: native-ic-ingress-class
-  route:
-    enabled: false
+nameOverride: ""
+fullnameOverride: ""
 
+image:
+  repo: quay.io/kiali/kiali-operator
+  tag: v1.22.0
+  pullPolicy: Always
+  pullSecrets: []
+
+# Deployment options for the operator pod.
+nodeSelector: {}
+podAnnotations: {}
+tolerations: []
+resources: {}
+affinity: {}
+replicaCount: 1
+priorityClassName: ""
+
+# metrics.enabled: set to true if you want Prometheus to collect metrics from the operator
+metrics:
+  enabled: true
+
+# debug.enabled: when true the full ansible logs are dumped after each reconciliation run
+# debug.verbosity: defines the amount of details the operator will log (higher numbers are more noisy)
+debug:
+  enabled: true
+  verbosity: "1"
+
+# Defines where the operator will look for Kial CR resources. "" means "all namespaces".
+watchNamespace: ""
+
+# Set to true if you want the operator to be able to create cluster roles. This is necessary
+# if you want to support Kiali CRs with spec.deployment.accessible_namespaces of '**'.
+# Note that this will be overriden to "true" if cr.create is true and cr.spec.deployment.accessible_namespaces is ['**'].
+clusterRoleCreator: true
+
+# Set to true if you want to allow the operator to only be able to install Kiali in view-only-mode.
+# The purpose for this setting is to allow you to restrict the permissions given to the operator itself.
+onlyViewOnlyMode: false
+
+# For what a Kiali CR spec can look like, see:
+# https://github.com/kiali/kiali-operator/blob/master/deploy/kiali/kiali_cr.yaml
 cr:
-  create: true   # これがUI起動の鍵です
-  name: kiali
-  namespace: istio-system
-  spec:
-    auth:
-      strategy: anonymous
-    deployment:
-      cluster_wide_access: true
-    server:
-      web_fqdn: "istio.dev.ec-gaihan-development.com"
+  # ▼▼▼ 変更点 1 ▼▼▼
+  # Kialiカスタムリソースをこのチャートで作成・管理するように 'true' に変更します。
+  create: true
+  name: kiali
+
+  # ▼▼▼ 変更点 2 ▼▼▼
+  # Kialiをインストールする名前空間を指定します (例: istio-system)。
+  # ご自身の環境に合わせて設定してください。
+  namespace: "istio-system"
+
+  spec:
+    # ▼▼▼ 追記点 3 ▼▼▼
+    # 外部サービス (Prometheus) の設定を追記します。
+    external_services:
+      prometheus:
+        # 'monitoring' ネームスペースにあるPrometheusのURLを指定します。
+        # (サービス名はご自身の環境に合わせて修正してください)
+        url: "http://dev-kube-prometheus-stack-prometheus.monitoring:9090"
+
+    # --- ここからは既存の設定 ---
+    deployment:
+      accessible_namespaces:
+      - '**'
