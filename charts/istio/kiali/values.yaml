@@ -34,4 +34,4 @@ cr:
     external_services:
       prometheus:
         # ご自身の環境のPrometheusのURL
-        url: "http://dev-kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+        url: "http://istio-prometheus-server.istio-system.svc.cluster.local:80"
