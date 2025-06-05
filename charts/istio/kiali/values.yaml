@@ -14,10 +14,7 @@ kiali:
     # 外部サービスとしてPrometheusを指定します
     # (ご提示のファイルにあった追記点3に相当します)
     # ※お使いのIstioのバージョンによってはキー名が異なる可能性があります
-    external_services:
-      prometheus:
-        # ご自身の環境のPrometheusのURL
-        url: "http://dev-kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+
 
   # Kialiが監視する名前空間を指定します
   deployment:
@@ -34,3 +31,7 @@ cr:
       cluster_wide_access: true
     server:
       web_fqdn: "kiali.dev.ec-gaihan-development.com"
+    external_services:
+      prometheus:
+        # ご自身の環境のPrometheusのURL
+        url: "http://dev-kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
