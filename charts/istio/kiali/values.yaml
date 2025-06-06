@@ -30,8 +30,8 @@ cr:
     deployment:
       cluster_wide_access: true
     server:
-      web_fqdn: "kiali.dev.ec-gaihan-development.com"
+      web_fqdn: "kiali.mgmt.ec-gaihan-development.com"
     external_services:
       prometheus:
         # ご自身の環境のPrometheusのURL
-        url: "http://istio-prometheus-server.istio-system.svc.cluster.local:80"
+        url: "http://thanos-query.monitoring.svc.cluster.local:9090"
