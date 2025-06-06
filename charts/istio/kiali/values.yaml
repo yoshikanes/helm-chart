@@ -37,7 +37,5 @@ cr:
     server:
       web_fqdn: "kiali.mgmt.ec-gaihan-development.com"
     external_services:
-      istio:
-        url: "http://istiod.testing.svc:15014"
       prometheus:
         url: "http://thanos-query.monitoring.svc.cluster.local:9090"
