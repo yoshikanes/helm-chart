@@ -7,6 +7,6 @@ objstoreConfig:
 query:
   stores:
     - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
-    - "dnssrv+_grpc._tcp.dev-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
+    - "thanos-gateway.dev.ec-gaihan-development.com:443"
 storegateway:
   enabled: true
