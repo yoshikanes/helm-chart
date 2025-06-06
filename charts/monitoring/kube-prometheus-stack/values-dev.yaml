@@ -26,7 +26,7 @@ prometheus:
       oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
       oci-native-ingress.oraclecloud.com/healthcheck-port: "10902"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/-/healthy"
-      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
+      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
       oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
       oci-native-ingress.oraclecloud.com/https-listener-port: "443"
     hosts:
