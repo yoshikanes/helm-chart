@@ -12,7 +12,7 @@ cr:
         enabled: true
         class_name: "native-ic-ingress-class" # ingressClassNameの代わり
         override_yaml:
-          metadata: {}
+          metadata:
             annotations:
               oci-native-ingress.oraclecloud.com/secure-backends: "false"
               oci-native-ingress.oraclecloud.com/backend-protocol: "HTTP"
