@@ -8,6 +8,11 @@ kiali:
     namespace: istio-system
   ingress:
     enabled: true
+    annotations:
+      # OCI Native Ingress Controller用のアノテーション
+      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
+      oci-native-ingress.oraclecloud.com/healthcheck-path: "/" # Kialiのパスに合わせて変更が必要な場合があります
+      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa_YOUR_KIALI_CERT_OCID"
 
   # Kialiダッシュボードの設定
   dashboard:
@@ -32,6 +37,7 @@ cr:
     server:
       web_fqdn: "kiali.mgmt.ec-gaihan-development.com"
     external_services:
+      istio:
+        url: "http://istiod.testing.svc:15014"
       prometheus:
-        # ご自身の環境のPrometheusのURL
         url: "http://thanos-query.monitoring.svc.cluster.local:9090"
