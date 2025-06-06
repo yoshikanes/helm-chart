@@ -18,3 +18,16 @@ prometheus:
             compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
   thanosService:
     enabled: true
+  thanosIngress:
+    enabled: true
+    ingressClassName: native-ic-ingress-class
+    annotations:
+      oci-native-ingress.oraclecloud.com/backend-protocol: "GRPC"
+      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
+      oci-native-ingress.oraclecloud.com/healthcheck-port: "10902"
+      oci-native-ingress.oraclecloud.com/healthcheck-path: "/-/healthy"
+      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
+      oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
+      oci-native-ingress.oraclecloud.com/https-listener-port: "443"
+    hosts:
+      - thanos-sidecar.dev.ec-gaihan-development.com
