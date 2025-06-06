@@ -5,6 +5,11 @@ objstoreConfig:
     bucket: "thanos-metrics-storage"
     compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
 query:
+  grpc:
+    client:
+      serverName: thanos-gateway.dev.ec-gaihan-development.com
+      tls:
+        enabled: true
   stores:
     - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
     - "thanos-gateway.dev.ec-gaihan-development.com:8443"
