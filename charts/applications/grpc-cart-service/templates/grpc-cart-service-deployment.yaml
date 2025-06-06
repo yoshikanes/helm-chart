@@ -4,7 +4,7 @@ metadata:
   labels:
     app: {{ .Values.selector.app }}
   name: {{ .Values.deployment.name }}
-  namespace: microservices
+  namespace: microservices-b
 spec:
   replicas: {{ .Values.deployment.replicaCount }}
   selector:
