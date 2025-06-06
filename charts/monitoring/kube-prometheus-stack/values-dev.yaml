@@ -22,7 +22,7 @@ prometheus:
     enabled: true
     ingressClassName: native-ic-ingress-class
     annotations:
-      oci-native-ingress.oraclecloud.com/backend-protocol: "GRPC"
+      oci-native-ingress.oraclecloud.com/protocol: "HTTP2"
       oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
       oci-native-ingress.oraclecloud.com/healthcheck-port: "10902"
       oci-native-ingress.oraclecloud.com/healthcheck-path: "/-/healthy"
