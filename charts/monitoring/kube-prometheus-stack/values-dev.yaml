@@ -30,4 +30,5 @@ prometheus:
       oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
       oci-native-ingress.oraclecloud.com/https-listener-port: "443"
     hosts:
-      - thanos-sidecar.dev.ec-gaihan-development.com
+      - thanos-gateway.dev.ec-gaihan-development.com
+    pathType: Prefix
