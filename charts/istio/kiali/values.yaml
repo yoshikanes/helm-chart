@@ -1,30 +1,5 @@
-# この内容をArgo CDのvaluesに設定してください。
-# Argo CDのApplicationマニフェストの spec.source.helm.values に直接記述するか、
-# この内容でvalues.yamlファイルを作成して参照させます。
+allowAllAccessibleNamespaces: true
 
-# 'kiali:' というキーで、IstioチャートにKialiサブチャート用の設定を渡します
-kiali:
-  deployment:
-    namespace: istio-system
-  ingress:
-    enabled: true
-    annotations:
-      # OCI Native Ingress Controller用のアノテーション
-      oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
-      oci-native-ingress.oraclecloud.com/healthcheck-path: "/" # Kialiのパスに合わせて変更が必要な場合があります
-      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa_YOUR_KIALI_CERT_OCID"
-
-  # Kialiダッシュボードの設定
-  dashboard:
-    # 外部サービスとしてPrometheusを指定します
-    # (ご提示のファイルにあった追記点3に相当します)
-    # ※お使いのIstioのバージョンによってはキー名が異なる可能性があります
-
-
-  # Kialiが監視する名前空間を指定します
-  deployment:
-    accessible_namespaces:
-      - "microservices"
 cr:
   create: true   # これがUI起動の鍵です
   name: kiali
@@ -33,9 +8,22 @@ cr:
     auth:
       strategy: anonymous
     deployment:
+      ingress:
+        enabled: true
+        class_name: "native-ic-ingress-class" # ingressClassNameの代わり
+        annotations:
+          override_yaml:
+            metadata:
+              annotations:
+                oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
+                oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
+                # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
+                oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa_YOUR_KIALI_CERT_OCID"      
       cluster_wide_access: true
     server:
       web_fqdn: "kiali.mgmt.ec-gaihan-development.com"
+
     external_services:
       prometheus:
         url: "http://thanos-query.monitoring.svc.cluster.local:9090"
+    istio_namespace: ""
