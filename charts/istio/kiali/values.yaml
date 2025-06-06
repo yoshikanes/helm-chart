@@ -11,14 +11,24 @@ cr:
       ingress:
         enabled: true
         class_name: "native-ic-ingress-class" # ingressClassNameの代わり
-        annotations:
-          override_yaml:
-            metadata:
-              annotations:
-                oci-native-ingress.oraclecloud.com/healthcheck-protocol: "HTTP"
-                oci-native-ingress.oraclecloud.com/healthcheck-path: "/"
-                # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
-                oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa_YOUR_KIALI_CERT_OCID"      
+        override_yaml:
+          metadata:
+            annotations:
+              oci-native-ingress.oraclecloud.com/secure-backends: "true"
+              oci-native-ingress.oraclecloud.com/backend-protocol: "HTTP"
+              # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
+              oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa_YOUR_KIALI_CERT_OCID"
+          spec:
+            rules:
+            - http:
+                paths:
+                - path: /kiali
+                  pathType: Prefix
+                  backend:
+                    service:
+                      name: "kiali"
+                      port:
+                        number: 20001s
       cluster_wide_access: true
     server:
       web_fqdn: "kiali.mgmt.ec-gaihan-development.com"
