@@ -19,22 +19,23 @@ cr:
               # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
               oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
               cluster_wide_access: "true"
-        host: kiali.mgmt.ec-gaihan-development.com
-        http:
-          paths:
-          - path: /
-            pathType: Prefix
-            backend: 
-              service:
-                name: "kiali"
-                port:
-                  number: 20001
+          spec:
+            rules:
+              host: kiali.mgmt.ec-gaihan-development.com
+              http:
+                paths:
+                - path: /
+                  pathType: Prefix
+                  backend: 
+                    service:
+                      name: "kiali"
+                      port:
+                        number: 20001
 
   external_services:
     prometheus:
       url: "http://thanos-query.monitoring.svc.cluster.local:9090"
   istio_namespace: ""
-
 
   deployment_view:
     enabled: true
