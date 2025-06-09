@@ -7,7 +7,7 @@ spec:
   project: default
   sources:
     - repoURL: https://kiali.org/helm-charts
-      chart: kiali-operator
+      chart: kiali-server
       targetRevision: 2.5.0
       helm:
         valueFiles:

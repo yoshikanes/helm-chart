@@ -21,8 +21,7 @@ cr:
               cluster_wide_access: "true"
           spec:
             rules:
-              host: kiali.mgmt.ec-gaihan-development.com
-              http:
+            - http:
                 paths:
                 - path: /
                   pathType: Prefix
@@ -31,6 +30,10 @@ cr:
                       name: "kiali"
                       port:
                         number: 20001
+      host_aliases:
+      - ip: 152.70.103.225
+        hostnames:
+        - "kiali.mgmt.ec-gaihan-development.com"
 
   external_services:
     prometheus:
