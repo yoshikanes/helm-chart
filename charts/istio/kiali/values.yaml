@@ -45,7 +45,7 @@ deployment:
                   service:
                     name: kiali
                     port:
-                      number: 20001
+                      number: 80
   # if deployment.hpa is defined, this replicas setting will be ignored
   replicas: 1
   resources:
