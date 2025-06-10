@@ -11,8 +11,8 @@ auth:
 
 clustering:
   autodetect_secrets:
-    enabled: true
-    label: "kiali.io/multiCluster=true"
+    enabled: false
+    label: "kiali.io/multiCluster=false"
   clusters: []
 
 deployment:
