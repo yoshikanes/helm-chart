@@ -1,6 +1,6 @@
 istio_namespace: "istio-system"
 auth:
-  strategy: "token"
+  strategy: "anonymous"
 deployment:
   cluster_wide_access: true
   ingress:
