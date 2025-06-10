@@ -1,47 +1,83 @@
-allowAllAccessibleNamespaces: true
 
-cr:
-  create: true   # これがUI起動の鍵です
-  name: kiali
-  namespace: istio-system
-  spec:
-    auth:
-      strategy: anonymous
-    deployment:
-      ingress:
-        enabled: true
-        class_name: "native-ic-ingress-class" # ingressClassNameの代わり
-        override_yaml:
-          metadata:
-            annotations:
-              oci-native-ingress.oraclecloud.com/secure-backends: "false"
-              oci-native-ingress.oraclecloud.com/backend-protocol: "HTTP"
-              # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
-              oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
-              cluster_wide_access: "true"
-          spec:
-            rules:
-            - http:
-                paths:
-                - path: /
-                  pathType: Prefix
-                  backend: 
-                    service:
-                      name: "kiali"
-                      port:
-                        number: 20001
-      host_aliases:
-      - ip: 152.70.103.225
-        hostnames:
-        - "kiali.mgmt.ec-gaihan-development.com"
+#
+# Settings that mimic the Kiali CR which are placed in the ConfigMap.
+# Note that only those values used by the Helm Chart will be here.
+#
 
-  external_services:
-    prometheus:
-      url: "http://thanos-query.monitoring.svc.cluster.local:9090"
-  istio_namespace: ""
+additional_display_details:
+- annotation: kiali.io/api-spec
+  icon_annotation: kiali.io/api-type
+  title: API Documentation
 
-  deployment_view:
+istio_namespace: "" # default is where Kiali is installed
+
+auth:
+  strategy: "anonymous"
+
+clustering:
+  autodetect_secrets:
     enabled: true
+    label: "kiali.io/multiCluster=true"
+  clusters: []
 
-  istio_component_namespaces:
-    prometheus: monitoring
+deployment:
+  additional_service_yaml: {}
+  # The Kiali server helm chart only supports cluster-wide access; setting cluster_wide_access to false is not supported.
+  # For more control over what the Kial Service Account can see, use the Kiali Operator.
+  cluster_wide_access: true
+  configmap_annotations: {}
+  custom_envs: []
+  custom_secrets: []
+  image_digest: "" # use "sha256" if image_version is a sha256 hash (do NOT prefix this value with a "@")
+  image_name: quay.io/kiali/kiali
+  image_pull_policy: "Always"
+  image_pull_secrets: []
+  image_version: v2.5.0 # version like "v1.39" (see: https://quay.io/repository/kiali/kiali?tab=tags) or a digest hash
+  ingress:
+    additional_labels: {}
+    class_name: "native-ic-ingress-class"
+    enabled: true
+    override_yaml:
+      metadata:
+        annotations:
+          oci-native-ingress.oraclecloud.com/secure-backends: "false"
+          oci-native-ingress.oraclecloud.com/backend-protocol: "HTTP"
+              # ★注意: このOCIDはKialiのホスト名に対応する証明書のOCIDに置き換えてください
+          oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
+      spec:
+        rules:
+        - host: kiali.mgmt.ec-gaihan-development.com
+          http:
+            paths:
+              - path: /
+                pathType: Prefix
+                backend:
+                  service:
+                    name: kiali
+                    port:
+                      number: 20001
+  remote_cluster_resources_only: false
+  # if deployment.hpa is defined, this replicas setting will be ignored
+  replicas: 1
+  resources:
+    requests:
+      cpu: "10m"
+      memory: "64Mi"
+    limits:
+      memory: "1Gi"
+  secret_name: "kiali"
+  security_context: {}
+  service_annotations: {}
+  service_type: ""
+  tolerations: []
+  topology_spread_constraints: []
+  version_label: v2.5.0 # v1.39 # v1.39.0 # see: https://quay.io/repository/kiali/kiali?tab=tags
+  view_only_mode: false
+
+external_services:
+  prometheus:
+    enabled: true
+    url: "http://thanos-query.monitoring.svc.cluster.local:9090"
+  istio:
+    root_namespace: "istio-system"
+
