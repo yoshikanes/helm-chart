@@ -24,9 +24,9 @@ deployment:
   image_pull_policy: "Always"
   image_version: v2.5.0 # version like "v1.39" (see: https://quay.io/repository/kiali/kiali?tab=tags) or a digest hash
   ingress:
-    additional_labels: {}
-    class_name: "native-ic-ingress-class"
     enabled: true
+    additional_labels: {}
+    ingressClassName: "native-ic-ingress-class"
     override_yaml:
       metadata:
         annotations:
