@@ -46,8 +46,6 @@ deployment:
                     name: kiali
                     port:
                       number: 20001
-          identity:
-            cert_file: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeiavxd6vjvcxgbypmq23qeqxztqpwyw6ihuk5n6f4yer4ua"
   # if deployment.hpa is defined, this replicas setting will be ignored
   replicas: 1
   resources:
