@@ -21,7 +21,7 @@ spec:
       sources:
         - repoURL: https://istio-release.storage.googleapis.com/charts
           chart: cni
-          targetRevision: 1.22.1
+          targetRevision: 1.26.0
           helm:
             valueFiles:
               - $values/charts/istio/cni/values-{{cluster}}.yaml
