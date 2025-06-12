@@ -1,0 +1,26 @@
+cni:
+  image: install-cni
+  logLevel: debug
+  cniConfDir: /etc/cni/net.d
+  excludeNamespaces:
+    - kube-system
+  chained: true
+  provider: "default"
+  ambient:
+    enabled: false
+    dnsCapture: false
+  repair:
+    enabled: true
+    labelPods: false
+    deletePods: false
+    repairPods: true
+    initContainerName: "istio-validation"
+    brokenPodLabelKey: "cni.istio.io/uninitialized"
+    brokenPodLabelValue: "true"
+
+global:
+  hub: docker.io/istio
+  tag: 1.22.1
+  logging:
+    level: default:info,cni:info
+  logAsJson: false
