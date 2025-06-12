@@ -1,3 +1,0 @@
-webhooks:
-  - name: validation.istio.io
-    failurePolicy: fail
