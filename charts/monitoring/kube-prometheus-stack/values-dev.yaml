@@ -4,6 +4,9 @@ grafana:
   enabled: false
 prometheus:
   prometheusSpec:
+    podMetadata:
+      labels:
+        sidecar.istio.io/inject: "true"
     externalLabels:
       cluster: development
     thanos:
