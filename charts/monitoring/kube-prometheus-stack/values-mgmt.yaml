@@ -15,7 +15,7 @@ grafana:
       - grafana.mgmt.ec-gaihan-development.com
 prometheus:
   prometheusSpec:
-    podMetadata: {}
+    podMetadata:
       labels:
         sidecar.istio.io/inject: true
     externalLabels:
