@@ -7,11 +7,11 @@ _internal_defaults_do_not_set:
   # Resources for a small pilot install
   resources:
     requests:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "100m"
+      memory: "64Mi"
     limits:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "150m"
+      memory: "128Mi"
   # Whether to use an existing CNI installation
   cni:
     enabled: true
@@ -215,11 +215,11 @@ _internal_defaults_do_not_set:
     # block in the relevant section below and setting the desired resources values.
     defaultResources:
       requests:
-        cpu: 10m
-      #   memory: 128Mi
-      # limits:
-      #   cpu: 100m
-      #   memory: 128Mi
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
 
     # Default hub for Istio images.
     # Releases are published to docker hub under 'istio' project.
@@ -441,50 +441,7 @@ _internal_defaults_do_not_set:
     #     gateways:
     #     - registryServiceName: istio-ingressgateway.istio-system.svc.cluster.local
     #       port: 443
-    #
-    meshNetworks: {}
 
-    # Use the user-specified, secret volume mounted key and certs for Pilot and workloads.
-    mountMtlsCerts: false
-
-    multiCluster:
-      # Set to true to connect two kubernetes clusters via their respective
-      # ingressgateway services when pods in each cluster cannot directly
-      # talk to one another. All clusters should be using Istio mTLS and must
-      # have a shared root CA for this model to work.
-      enabled: false
-      # Should be set to the name of the cluster this installation will run in. This is required for sidecar injection
-      # to properly label proxies
-      clusterName: ""
-
-    # Network defines the network this cluster belong to. This name
-    # corresponds to the networks in the map of mesh networks.
-    network: ""
-
-    # Configure the certificate provider for control plane communication.
-    # Currently, two providers are supported: "kubernetes" and "istiod".
-    # As some platforms may not have kubernetes signing APIs,
-    # Istiod is the default
-    pilotCertProvider: istiod
-
-    sds:
-      # The JWT token for SDS and the aud field of such JWT. See RFC 7519, section 4.1.3.
-      # When a CSR is sent from Istio Agent to the CA (e.g. Istiod), this aud is to make sure the
-      # JWT is intended for the CA.
-      token:
-        aud: istio-ca
-
-    sts:
-      # The service port used by Security Token Service (STS) server to handle token exchange requests.
-      # Setting this port to a non-zero value enables STS server.
-      servicePort: 0
-
-    # The name of the CA for workload certificates.
-    # For example, when caName=GkeWorkloadCertificate, GKE workload certificates
-    # will be used as the certificates for workloads.
-    # The default value is "" and when caName="", the CA will be configured by other
-    # mechanisms (e.g., environmental variable CA_PROVIDER).
-    caName: ""
 
     waypoint:
       # Resources for the waypoint proxy.
@@ -493,41 +450,10 @@ _internal_defaults_do_not_set:
           cpu: 100m
           memory: 128Mi
         limits:
-          cpu: 200m
-          memory: 256Mi
-
-      # If specified, affinity defines the scheduling constraints of waypoint pods.
-      affinity: {}
-
-      # Topology Spread Constraints for the waypoint proxy.
-      topologySpreadConstraints: []
-
-      # Node labels for the waypoint proxy.
-      nodeSelector: {}
-
-      # Tolerations for the waypoint proxy.
-      tolerations: []
+          cpu: 150m
+          memory: 192Mi
 
   base:
     # For istioctl usage to disable istio config crds in base
     enableIstioConfigCRDs: true
 
-  # Gateway Settings
-  gateways:
-    # Define the security context for the pod.
-    # If unset, this will be automatically set to the minimum privileges required to bind to port 80 and 443.
-    # On Kubernetes 1.22+, this only requires the `net.ipv4.ip_unprivileged_port_start` sysctl.
-    securityContext: {}
-
-    # Set to `type: RuntimeDefault` to use the default profile for templated gateways, if your container runtime supports it
-    seccompProfile: {}
-
-  # gatewayClasses allows customizing the configuration of the default deployment of Gateways per GatewayClass.
-  # For example:
-  # gatewayClasses:
-  #   istio:
-  #     service:
-  #       spec:
-  #         type: ClusterIP
-  # Per-Gateway configuration can also be set in the `Gateway.spec.infrastructure.parametersRef` field.
-  gatewayClasses: {}
