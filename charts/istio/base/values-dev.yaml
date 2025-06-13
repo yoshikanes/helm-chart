@@ -1,3 +1,11 @@
-webhooks:
-  - name: validation.istio.io
-    failurePolicy: fail
+_internal_defaults_do_not_set:
+  profile: "remote"
+
+  global:
+    istioNamespace: istio-system
+  base:
+     enableIstioConfigCRDs: false
+
+  defaultRevision: "default"
+  experimental:
+    stableValidationPolicy: false
