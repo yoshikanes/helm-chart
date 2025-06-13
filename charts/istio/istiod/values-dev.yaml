@@ -177,11 +177,7 @@ _internal_defaults_do_not_set:
     # This does not apply to gateway pods as they typically need a different
     # set of DNS settings than the normal application pods (e.g., in
     # multicluster scenarios).
-    multiCluster:
-      enabled: true
-      clusterName: "cluster2"
 
-    network: "network1"
 
     proxy:
       image: proxyv2
@@ -292,6 +288,10 @@ _internal_defaults_do_not_set:
     configValidation: true
   
     meshID: "mesh1"
+    multiCluster:
+      enabled: true
+      clusterName: "cluster2"
+    network: "network1"
 
     waypoint:
       # Resources for the waypoint proxy.
