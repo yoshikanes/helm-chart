@@ -303,11 +303,11 @@ _internal_defaults_do_not_set:
       # Resources for the waypoint proxy.
       resources:
         requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
           cpu: 100m
           memory: 128Mi
-        limits:
-          cpu: 150m
-          memory: 192Mi
 
   base:
     # For istioctl usage to disable istio config crds in base
