@@ -310,4 +310,5 @@ _internal_defaults_do_not_set:
   base:
     # For istioctl usage to disable istio config crds in base
     enableIstioConfigCRDs: true
+    validationCABundle: ""
 
