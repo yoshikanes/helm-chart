@@ -32,9 +32,6 @@ spec:
         server: '{{url}}'
         namespace: istio-system
       syncPolicy:
-        managedNamespaceMetadata:
-          labels:
-            istio-injection: enabled
         automated:
           prune: true
           selfHeal: true
