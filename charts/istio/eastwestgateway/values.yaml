@@ -1,5 +1,4 @@
 _internal_defaults_do_not_set:
-  name: "istio-eastwestgateway"
   kind: Deployment
 
   rbac:
