@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: istio-gateway-mgmt
+  name: istio-eastwestgateway-mgmt
   namespace: argocd
 spec:
   project: default
