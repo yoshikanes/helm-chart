@@ -296,7 +296,7 @@ _internal_defaults_do_not_set:
   
     meshID: "mesh1"
     multiCluster:
-      enabled: "true"    
+      enabled: true
       clusterName: "cluster1"
 
     waypoint:
