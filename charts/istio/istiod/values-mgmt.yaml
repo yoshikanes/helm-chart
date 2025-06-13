@@ -298,7 +298,7 @@ _internal_defaults_do_not_set:
     multiCluster:
       enabled: true
       clusterName: "cluster1"
-
+    network: "network1"
     waypoint:
       # Resources for the waypoint proxy.
       resources:
