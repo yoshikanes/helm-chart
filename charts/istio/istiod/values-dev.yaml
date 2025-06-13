@@ -1,6 +1,7 @@
 # "_internal_defaults_do_not_set" is a workaround for Helm limitations. Users should NOT set "._internal_defaults_do_not_set" explicitly, but rather directly set the fields internally.
 # For instance, instead of `--set _internal_defaults_do_not_set.foo=bar``, just set `--set foo=bar`.
 _internal_defaults_do_not_set:
+  profile: "remote"
   image: pilot
   traceSampling: 1.0
 
@@ -18,66 +19,20 @@ _internal_defaults_do_not_set:
     provider: default
 
 
-  # Settings related to the untaint controller
-  # This controller will remove `cni.istio.io/not-ready` from nodes when the istio-cni pod becomes ready
-  # It should be noted that cluster operator/owner is responsible for having the taint set by their infrastructure provider when new nodes are added to the cluster; the untaint controller does not taint nodes
-  taint:
-    # Controls whether or not the untaint controller is active
-    enabled: false
-    # What namespace the untaint controller should watch for istio-cni pods. This is only required when istio-cni is running in a different namespace than istiod
-    namespace: ""
-
-  affinity: {}
-
-  tolerations: []
-
   cpu:
     targetAverageUtilization: 80
   memory: {}
     # targetAverageUtilization: 80
 
-  # Additional volumeMounts to the istiod container
-  volumeMounts: []
-
-  # Additional volumes to the istiod pod
-  volumes: []
-
   # Inject initContainers into the istiod pod
   initContainers: []
 
-  nodeSelector: {}
-  podAnnotations: {}
-  serviceAnnotations: {}
-  serviceAccountAnnotations: {}
-  sidecarInjectorWebhookAnnotations: {}
-
-  topologySpreadConstraints: []
-
-  # You can use jwksResolverExtraRootCA to provide a root certificate
-  # in PEM format. This will then be trusted by pilot when resolving
-  # JWKS URIs.
-  jwksResolverExtraRootCA: ""
-
-  # The following is used to limit how long a sidecar can be connected
-  # to a pilot. It balances out load across pilot instances at the cost of
-  # increasing system churn.
   keepaliveMaxServerConnectionAge: 30m
-
-  # Additional labels to apply to the deployment.
-  deploymentLabels: {}
-
   ## Mesh config settings
 
   # Install the mesh config map, generated from values.yaml.
   # If false, pilot wil use default values (by default) or user-supplied values.
   configMap: true
-
-  # Additional labels to apply on the pod level for monitoring and logging configuration.
-  podLabels: {}
-
-  # Setup how istiod Service is configured. See https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
-  ipFamilyPolicy: ""
-  ipFamilies: []
 
   # Ambient mode only.
   # Set this if you install ztunnel to a different namespace from `istiod`.
@@ -90,26 +45,6 @@ _internal_defaults_do_not_set:
   trustedZtunnelName: ""
 
   sidecarInjectorWebhook:
-    # You can use the field called alwaysInjectSelector and neverInjectSelector which will always inject the sidecar or
-    # always skip the injection on pods that match that label selector, regardless of the global policy.
-    # See https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/#more-control-adding-exceptions
-    neverInjectSelector: []
-    alwaysInjectSelector: []
-
-    # injectedAnnotations are additional annotations that will be added to the pod spec after injection
-    # This is primarily to support PSP annotations. For example, if you defined a PSP with the annotations:
-    #
-    # annotations:
-    #   apparmor.security.beta.kubernetes.io/allowedProfileNames: runtime/default
-    #   apparmor.security.beta.kubernetes.io/defaultProfileName: runtime/default
-    #
-    # The PSP controller would add corresponding annotations to the pod spec for each container. However, this happens before
-    # the inject adds additional containers, so we must specify them explicitly here. With the above example, we could specify:
-    # injectedAnnotations:
-    #   container.apparmor.security.beta.kubernetes.io/istio-init: runtime/default
-    #   container.apparmor.security.beta.kubernetes.io/istio-proxy: runtime/default
-    injectedAnnotations: {}
-
     # This enables injection of sidecar in all namespaces,
     # with the exception of namespaces with "istio-injection:disabled" annotation
     # Only one environment should have this enabled.
@@ -122,43 +57,16 @@ _internal_defaults_do_not_set:
 
     rewriteAppHTTPProbe: true
 
-    # Templates defines a set of custom injection templates that can be used. For example, defining:
-    #
-    # templates:
-    #   hello: |
-    #     metadata:
-    #       labels:
-    #         hello: world
-    #
-    # Then starting a pod with the `inject.istio.io/templates: hello` annotation, will result in the pod
-    # being injected with the hello=world labels.
-    # This is intended for advanced configuration only; most users should use the built in template
-    templates: {}
-
-    # Default templates specifies a set of default templates that are used in sidecar injection.
-    # By default, a template `sidecar` is always provided, which contains the template of default sidecar.
-    # To inject other additional templates, define it using the `templates` option, and add it to
-    # the default templates list.
-    # For example:
-    #
-    # templates:
-    #   hello: |
-    #     metadata:
-    #       labels:
-    #         hello: world
-    #
-    # defaultTemplates: ["sidecar", "hello"]
-    defaultTemplates: []
   istiodRemote:
     # If `true`, indicates that this cluster/install should consume a "remote istiod" installation,
     # and istiod itself will NOT be installed in this cluster - only the support resources necessary
     # to utilize a remote instance.
-    enabled: false
+    enabled: true
     # Sidecar injector mutating webhook configuration clientConfig.url value.
     # For example: https://$remotePilotAddress:15017/inject
     # The host should not refer to a service running in the cluster; use a service reference by specifying
     # the clientConfig.service field instead.
-    injectionURL: ""
+    injectionURL: "https://138.3.208.98:15017/inject/cluster/cluster-cwnqw52ysxa/net/network1"
 
     # Sidecar injector mutating webhook configuration path value for the clientConfig.service field.
     # Override to pass env variables, for example: /inject/cluster/remote/net/network2
@@ -272,17 +180,11 @@ _internal_defaults_do_not_set:
     # This does not apply to gateway pods as they typically need a different
     # set of DNS settings than the normal application pods (e.g., in
     # multicluster scenarios).
-    # NOTE: If using templates, follow the pattern in the commented example below.
-    #podDNSSearchNamespaces:
-    #- global
-    #- "{{ valueOrDefault .DeploymentMeta.Namespace \"default\" }}.global"
+    multiCluster:
+      enabled: "true"
+      clusterName: "cluster2"
 
-    # Kubernetes >=v1.11.0 will create two PriorityClass, including system-cluster-critical and
-    # system-node-critical, it is better to configure this in order to make sure your Istio pods
-    # will not be killed because of low priority class.
-    # Refer to https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
-    # for more detail.
-    priorityClassName: ""
+    network: "network1"
 
     proxy:
       image: proxyv2
@@ -371,7 +273,7 @@ _internal_defaults_do_not_set:
       forceApplyIptables: false
 
     # configure remote pilot and istiod service and endpoint
-    remotePilotAddress: ""
+    remotePilotAddress: "138.3.208.98"
 
     ##############################################################################################
     # The following values are found in other charts. To effectively modify these values, make   #
@@ -384,64 +286,15 @@ _internal_defaults_do_not_set:
     caAddress: ""
 
     # Enable control of remote clusters.
-    externalIstiod: false
+    externalIstiod: true
 
     # Configure a remote cluster as the config cluster for an external istiod.
-    configCluster: false
+    configCluster: true
 
     # configValidation enables the validation webhook for Istio configuration.
     configValidation: true
-
-    # Mesh ID means Mesh Identifier. It should be unique within the scope where
-    # meshes will interact with each other, but it is not required to be
-    # globally/universally unique. For example, if any of the following are true,
-    # then two meshes must have different Mesh IDs:
-    # - Meshes will have their telemetry aggregated in one place
-    # - Meshes will be federated together
-    # - Policy will be written referencing one mesh from the other
-    #
-    # If an administrator expects that any of these conditions may become true in
-    # the future, they should ensure their meshes have different Mesh IDs
-    # assigned.
-    #
-    # Within a multicluster mesh, each cluster must be (manually or auto)
-    # configured to have the same Mesh ID value. If an existing cluster 'joins' a
-    # multicluster mesh, it will need to be migrated to the new mesh ID. Details
-    # of migration TBD, and it may be a disruptive operation to change the Mesh
-    # ID post-install.
-    #
-    # If the mesh admin does not specify a value, Istio will use the value of the
-    # mesh's Trust Domain. The best practice is to select a proper Trust Domain
-    # value.
-    meshID: ""
-
-    # Configure the mesh networks to be used by the Split Horizon EDS.
-    #
-    # The following example defines two networks with different endpoints association methods.
-    # For `network1` all endpoints that their IP belongs to the provided CIDR range will be
-    # mapped to network1. The gateway for this network example is specified by its public IP
-    # address and port.
-    # The second network, `network2`, in this example is defined differently with all endpoints
-    # retrieved through the specified Multi-Cluster registry being mapped to network2. The
-    # gateway is also defined differently with the name of the gateway service on the remote
-    # cluster. The public IP for the gateway will be determined from that remote service (only
-    # LoadBalancer gateway service type is currently supported, for a NodePort type gateway service,
-    # it still need to be configured manually).
-    #
-    # meshNetworks:
-    #   network1:
-    #     endpoints:
-    #     - fromCidr: "192.168.0.1/24"
-    #     gateways:
-    #     - address: 1.1.1.1
-    #       port: 80
-    #   network2:
-    #     endpoints:
-    #     - fromRegistry: reg1
-    #     gateways:
-    #     - registryServiceName: istio-ingressgateway.istio-system.svc.cluster.local
-    #       port: 443
-
+  
+    meshID: "mesh1"
 
     waypoint:
       # Resources for the waypoint proxy.

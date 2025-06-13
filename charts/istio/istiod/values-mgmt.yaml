@@ -1,0 +1,320 @@
+# "_internal_defaults_do_not_set" is a workaround for Helm limitations. Users should NOT set "._internal_defaults_do_not_set" explicitly, but rather directly set the fields internally.
+# For instance, instead of `--set _internal_defaults_do_not_set.foo=bar``, just set `--set foo=bar`.
+_internal_defaults_do_not_set:
+  image: pilot
+  traceSampling: 1.0
+
+  # Resources for a small pilot install
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "64Mi"
+    limits:
+      cpu: "150m"
+      memory: "128Mi"
+  # Whether to use an existing CNI installation
+  cni:
+    enabled: true
+    provider: default
+
+
+  cpu:
+    targetAverageUtilization: 80
+  memory: {}
+    # targetAverageUtilization: 80
+
+  # Inject initContainers into the istiod pod
+  initContainers: []
+
+  keepaliveMaxServerConnectionAge: 30m
+  ## Mesh config settings
+
+  # Install the mesh config map, generated from values.yaml.
+  # If false, pilot wil use default values (by default) or user-supplied values.
+  configMap: true
+
+  # Ambient mode only.
+  # Set this if you install ztunnel to a different namespace from `istiod`.
+  # If set, `istiod` will allow connections from trusted node proxy ztunnels
+  # in the provided namespace.
+  # If unset, `istiod` will assume the trusted node proxy ztunnel resides
+  # in the same namespace as itself.
+  trustedZtunnelNamespace: ""
+  # Set this if you install ztunnel with a name different from the default.
+  trustedZtunnelName: ""
+
+  sidecarInjectorWebhook:
+    # This enables injection of sidecar in all namespaces,
+    # with the exception of namespaces with "istio-injection:disabled" annotation
+    # Only one environment should have this enabled.
+    enableNamespacesByDefault: false
+
+    # Mutations that occur after the sidecar injector are not handled by default, as the Istio sidecar injector is only run
+    # once. For example, an OPA sidecar injected after the Istio sidecar will not have it's liveness/readiness probes rewritten.
+    # Setting this to `IfNeeded` will result in the sidecar injector being run again if additional mutations occur.
+    reinvocationPolicy: Never
+
+    rewriteAppHTTPProbe: true
+
+  istiodRemote:
+    # If `true`, indicates that this cluster/install should consume a "remote istiod" installation,
+    # and istiod itself will NOT be installed in this cluster - only the support resources necessary
+    # to utilize a remote instance.
+    enabled: false
+    # Sidecar injector mutating webhook configuration clientConfig.url value.
+    # For example: https://$remotePilotAddress:15017/inject
+    # The host should not refer to a service running in the cluster; use a service reference by specifying
+    # the clientConfig.service field instead.
+    injectionURL: ""
+
+    # Sidecar injector mutating webhook configuration path value for the clientConfig.service field.
+    # Override to pass env variables, for example: /inject/cluster/remote/net/network2
+    injectionPath: "/inject"
+
+    injectionCABundle: ""
+  telemetry:
+    enabled: true
+    v2:
+      # For Null VM case now.
+      # This also enables metadata exchange.
+      enabled: true
+      # Indicate if prometheus stats filter is enabled or not
+      prometheus:
+        enabled: true
+      # stackdriver filter settings.
+      stackdriver:
+        enabled: false
+  # Revision is set as 'version' label and part of the resource names when installing multiple control planes.
+  revision: ""
+
+  # Revision tags are aliases to Istio control plane revisions
+  revisionTags: []
+
+  # For Helm compatibility.
+  ownerName: ""
+
+  # meshConfig defines runtime configuration of components, including Istiod and istio-agent behavior
+  # See https://istio.io/docs/reference/config/istio.mesh.v1alpha1/ for all available options
+  meshConfig:
+    enablePrometheusMerge: true
+
+  experimental:
+    stableValidationPolicy: false
+
+  global:
+    # Used to locate istiod.
+    istioNamespace: istio-system
+    # List of cert-signers to allow "approve" action in the istio cluster role
+    #
+    # certSigners:
+    #   - clusterissuers.cert-manager.io/istio-ca
+    certSigners: []
+    # enable pod disruption budget for the control plane, which is used to
+    # ensure Istio control plane components are gradually upgraded or recovered.
+    defaultPodDisruptionBudget:
+      enabled: true
+      # The values aren't mutable due to a current PodDisruptionBudget limitation
+      # minAvailable: 1
+
+    # A minimal set of requested resources to applied to all deployments so that
+    # Horizontal Pod Autoscaler will be able to function (if set).
+    # Each component can overwrite these default values by adding its own resources
+    # block in the relevant section below and setting the desired resources values.
+    defaultResources:
+      requests:
+        cpu: 100m
+        memory: 64Mi
+      limits:
+        cpu: 150m
+        memory: 128Mi
+
+    # Default hub for Istio images.
+    # Releases are published to docker hub under 'istio' project.
+    # Dev builds from prow are on gcr.io
+    hub: docker.io/istio
+    # Default tag for Istio images.
+    tag: 1.26.0
+    # Variant of the image to use.
+    # Currently supported are: [debug, distroless]
+    variant: ""
+
+    # Specify image pull policy if default behavior isn't desired.
+    # Default behavior: latest images will be Always else IfNotPresent.
+    imagePullPolicy: ""
+
+    # ImagePullSecrets for all ServiceAccount, list of secrets in the same namespace
+    # to use for pulling any images in pods that reference this ServiceAccount.
+    # For components that don't use ServiceAccounts (i.e. grafana, servicegraph, tracing)
+    # ImagePullSecrets will be added to the corresponding Deployment(StatefulSet) objects.
+    # Must be set for any cluster configured with private docker registry.
+    imagePullSecrets: []
+    # - private-registry-key
+
+    # Enabled by default in master for maximising testing.
+    istiod:
+      enableAnalysis: false
+
+    # To output all istio components logs in json format by adding --log_as_json argument to each container argument
+    logAsJson: false
+
+    # Comma-separated minimum per-scope logging level of messages to output, in the form of <scope>:<level>,<scope>:<level>
+    # The control plane has different scopes depending on component, but can configure default log level across all components
+    # If empty, default scope and level will be used as configured in code
+    logging:
+      level: "default:info"
+
+    omitSidecarInjectorConfigMap: false
+
+    # Configure whether Operator manages webhook configurations. The current behavior
+    # of Istiod is to manage its own webhook configurations.
+    # When this option is set as true, Istio Operator, instead of webhooks, manages the
+    # webhook configurations. When this option is set as false, webhooks manage their
+    # own webhook configurations.
+    operatorManageWebhooks: false
+
+    # Custom DNS config for the pod to resolve names of services in other
+    # clusters. Use this to add additional search domains, and other settings.
+    # see
+    # https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#dns-config
+    # This does not apply to gateway pods as they typically need a different
+    # set of DNS settings than the normal application pods (e.g., in
+    # multicluster scenarios).
+    # NOTE: If using templates, follow the pattern in the commented example below.
+    #podDNSSearchNamespaces:
+    #- global
+    #- "{{ valueOrDefault .DeploymentMeta.Namespace \"default\" }}.global"
+
+    # Kubernetes >=v1.11.0 will create two PriorityClass, including system-cluster-critical and
+    # system-node-critical, it is better to configure this in order to make sure your Istio pods
+    # will not be killed because of low priority class.
+    # Refer to https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/#priorityclass
+    # for more detail.
+    priorityClassName: ""
+
+    proxy:
+      image: proxyv2
+
+      # This controls the 'policy' in the sidecar injector.
+      autoInject: enabled
+
+      # CAUTION: It is important to ensure that all Istio helm charts specify the same clusterDomain value
+      # cluster domain. Default value is "cluster.local".
+      clusterDomain: "cluster.local"
+
+      # Per Component log level for proxy, applies to gateways and sidecars. If a component level is
+      # not set, then the global "logLevel" will be used.
+      componentLogLevel: "misc:error"
+
+      # istio ingress capture allowlist
+      # examples:
+      #     Redirect only selected ports:            --includeInboundPorts="80,8080"
+      excludeInboundPorts: ""
+      includeInboundPorts: "*"
+
+      # istio egress capture allowlist
+      # https://istio.io/docs/tasks/traffic-management/egress.html#calling-external-services-directly
+      # example: includeIPRanges: "172.30.0.0/16,172.20.0.0/16"
+      # would only capture egress traffic on those two IP Ranges, all other outbound traffic would
+      # be allowed by the sidecar
+      includeIPRanges: "*"
+      excludeIPRanges: ""
+      includeOutboundPorts: ""
+      excludeOutboundPorts: ""
+
+      # Log level for proxy, applies to gateways and sidecars.
+      # Expected values are: trace|debug|info|warning|error|critical|off
+      logLevel: warning
+
+      # Specify the path to the outlier event log.
+      # Example: /dev/stdout
+      outlierLogPath: ""
+
+      #If set to true, istio-proxy container will have privileged securityContext
+      privileged: false
+
+      # The number of successive failed probes before indicating readiness failure.
+      readinessFailureThreshold: 4
+
+      # The initial delay for readiness probes in seconds.
+      readinessInitialDelaySeconds: 0
+
+      # The period between readiness probes.
+      readinessPeriodSeconds: 15
+
+      # Enables or disables a startup probe.
+      # For optimal startup times, changing this should be tied to the readiness probe values.
+      #
+      # If the probe is enabled, it is recommended to have delay=0s,period=15s,failureThreshold=4.
+      # This ensures the pod is marked ready immediately after the startup probe passes (which has a 1s poll interval),
+      # and doesn't spam the readiness endpoint too much
+      #
+      # If the probe is disabled, it is recommended to have delay=1s,period=2s,failureThreshold=30.
+      # This ensures the startup is reasonable fast (polling every 2s). 1s delay is used since the startup is not often ready instantly.
+      startupProbe:
+        enabled: true
+        failureThreshold: 600 # 10 minutes
+
+      # Resources for the sidecar.
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "64Mi"
+        limits:
+          cpu: "150m"
+          memory: "128Mi"
+
+      # Default port for Pilot agent health checks. A value of 0 will disable health checking.
+      statusPort: 15020
+
+      # Specify which tracer to use. One of: zipkin, lightstep, datadog, stackdriver, none.
+      # If using stackdriver tracer outside GCP, set env GOOGLE_APPLICATION_CREDENTIALS to the GCP credential file.
+      tracer: "none"
+
+    proxy_init:
+      # Base name for the proxy_init container, used to configure iptables.
+      image: proxyv2
+      # Bypasses iptables idempotency handling, and attempts to apply iptables rules regardless of table state, which may cause unrecoverable failures.
+      # Do not use unless you need to work around an issue of the idempotency handling. This flag will be removed in future releases.
+      forceApplyIptables: false
+
+    # configure remote pilot and istiod service and endpoint
+    remotePilotAddress: ""
+
+    ##############################################################################################
+    # The following values are found in other charts. To effectively modify these values, make   #
+    # make sure they are consistent across your Istio helm charts                                #
+    ##############################################################################################
+
+    # The customized CA address to retrieve certificates for the pods in the cluster.
+    # CSR clients such as the Istio Agent and ingress gateways can use this to specify the CA endpoint.
+    # If not set explicitly, default to the Istio discovery address.
+    caAddress: ""
+
+    # Enable control of remote clusters.
+    externalIstiod: true
+
+    # Configure a remote cluster as the config cluster for an external istiod.
+    configCluster: false
+
+    # configValidation enables the validation webhook for Istio configuration.
+    configValidation: true
+  
+    meshID: "mesh1"
+    multiCluster:
+      enabled: "true"    
+      clusterName: "cluster1"
+
+    waypoint:
+      # Resources for the waypoint proxy.
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 150m
+          memory: 192Mi
+
+  base:
+    # For istioctl usage to disable istio config crds in base
+    enableIstioConfigCRDs: true
+
