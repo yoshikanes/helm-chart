@@ -291,8 +291,6 @@ _internal_defaults_do_not_set:
     # Configure a remote cluster as the config cluster for an external istiod.
     configCluster: false
 
-    # configValidation enables the validation webhook for Istio configuration.
-    configValidation: true
   
     meshID: "mesh1"
     multiCluster:
