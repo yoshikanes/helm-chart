@@ -66,8 +66,8 @@ _internal_defaults_do_not_set:
     # For example: https://$remotePilotAddress:15017/inject
     # The host should not refer to a service running in the cluster; use a service reference by specifying
     # the clientConfig.service field instead.
-    injectionURL: "https://138.3.208.98:15017/inject/cluster/testing/net/network1"
-
+    #injectionURL: "https://138.3.208.98:15017/inject/cluster/testing/net/network1"
+    injectionPath: "/inject/cluster/cluster2/net/network1"
 
     injectionCABundle: ""
   telemetry:
