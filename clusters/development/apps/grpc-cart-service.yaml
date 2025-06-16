@@ -14,7 +14,7 @@ spec:
         - values/dev.yaml
   destination:
     server: https://152.70.103.225:6443
-    namespace: microservices-b
+    namespace: microservices
   syncPolicy:
     managedNamespaceMetadata:
       labels:
