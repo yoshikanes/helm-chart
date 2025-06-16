@@ -9,6 +9,9 @@ spec:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
     path: charts/applications/kafka-api
+    directory:
+      # 除外設定
+      exclude: '{values/*}'
     helm:
       valueFiles:
         - values/dev.yaml
