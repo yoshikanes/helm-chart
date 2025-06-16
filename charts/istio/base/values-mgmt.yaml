@@ -3,6 +3,7 @@ _internal_defaults_do_not_set:
     istioNamespace: istio-system
   base:
     enableIstioConfigCRDs: false
+    validationCABundle: ""
 
   defaultRevision: "default"
   experimental:
