@@ -9,19 +9,13 @@ spec:
     repoURL: https://github.com/yoshikanes/helm-chart.git
     targetRevision: main
     path: charts/applications/kafka-api
-    directory:
-      # 除外設定
-      exclude: '{values/*}'
     helm:
       valueFiles:
         - values/dev.yaml
   destination:
     server: https://152.70.103.225:6443
-    namespace: microservices
+    namespace: kafka
   syncPolicy:
-    managedNamespaceMetadata:
-      labels:
-        istio-injection: enabled
     automated:
       selfHeal: true
       prune: true
