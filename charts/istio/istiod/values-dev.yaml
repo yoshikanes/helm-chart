@@ -26,7 +26,7 @@ _internal_defaults_do_not_set:
 
   istiodRemote:
     enabled: true
-    injectionURL: "https://158.179.183.148:15017/inject/cluster/cluster2/net/network1"
+    injectionURL: "https://10.96.195.116:15017/inject/cluster/cluster2/net/network1"
     #injectionPath: "/inject/cluster/cluster2/net/network1"
     injectionCABundle: ""
   telemetry:
