@@ -24,8 +24,6 @@ spec:
           parameters:
             - name: installCRDs
               value: "true"
-            - name: featureGates
-              value: "ExperimentalCertificateSigningRequestControllers=true"
       destination:
         server: '{{url}}'
         namespace: cert-manager
