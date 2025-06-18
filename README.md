@@ -11,6 +11,6 @@
 │   ├── management  # managementクラスタのApplicaitonマニフェスト配置用ディレクトリ
 │   └── root-app.yaml  # App of appsパターンの親アプリマニフェスト
 └── values
-    ├── internal  # 独自チャートのvalues配置用ディレクトリ
-    └── external  # 外部チャートのvalues配置用ディレクトリ
+    ├── external  # 外部チャートのvalues配置用ディレクトリ
+    └── internal  # 独自チャートのvalues配置用ディレクトリ
 ```
