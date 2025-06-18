@@ -1,10 +1,10 @@
 resources:
   requests:
-    cpu: "100m"
-    memory: "64Mi"
+    cpu: 100m
+    memory: 64Mi
   limits:
-    cpu: "150m"
-    memory: "128Mi"
+    cpu: 150m
+    memory: 128Mi
 cni:
   enabled: true
 global:
@@ -20,20 +20,20 @@ global:
     logLevel: debug
     resources:
       requests:
-        cpu: "100m"
-        memory: "64Mi"
+        cpu: 100m
+        memory: 64Mi
       limits:
-        cpu: "150m"
-        memory: "128Mi"
+        cpu: 150m
+        memory: 128Mi
   proxy_init:
     image: proxyv2
     resources:
       requests:
-        cpu: "100m"
-        memory: "64Mi"
+        cpu: 100m
+        memory: 64Mi
       limits:
-        cpu: "150m"
-        memory: "128Mi"
+        cpu: 150m
+        memory: 128Mi
   meshID: "mesh1"
   multiCluster:
     enabled: true
