@@ -10,11 +10,11 @@ spec:
     namespace: default
   source:
     repoURL: https://github.com/yoshikanes/helm-chart.git
-    path: charts/networking/ingress-bootstrap
+    path: charts/ingress-bootstrap
     targetRevision: main
     helm:
       valueFiles:
-        - values/dev.yaml
+        - ../../../values/internal/ingress-bootstrap/values-dev.yaml
   syncPolicy:
     automated:
       prune: true

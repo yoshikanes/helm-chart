@@ -11,7 +11,7 @@ spec:
       targetRevision: 8.0.6
       helm:
         valueFiles:
-          - $values/charts/infra/argocd/values.yaml
+          - $values/values/external/argocd/values.yaml
     - repoURL: https://github.com/yoshikanes/helm-chart.git
       targetRevision: main
       ref: values

@@ -11,7 +11,7 @@ spec:
       targetRevision: 1.26.0
       helm:
         valueFiles:
-          - $values/charts/istio/eastwestgateway/values.yaml
+          - $values/values/external/istio/eastwestgateway/values.yaml
     - repoURL: https://github.com/yoshikanes/helm-chart.git
       targetRevision: main
       ref: values

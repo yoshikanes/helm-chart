@@ -24,7 +24,7 @@ spec:
           targetRevision: 72.9.1
           helm:
             valueFiles:
-              - $values/charts/monitoring/kube-prometheus-stack/values-{{cluster}}.yaml
+              - $values/values/external/kube-prometheus-stack/values-{{cluster}}.yaml
         - repoURL: https://github.com/yoshikanes/helm-chart.git
           targetRevision: main
           ref: values
