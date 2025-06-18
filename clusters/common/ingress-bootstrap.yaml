@@ -22,7 +22,7 @@ spec:
       source:
         repoURL: https://github.com/yoshikanes/helm-chart.git
         path: charts/ingress-bootstrap
-        targetRevision: mainj
+        targetRevision: main
         helm:
           valueFiles:
             - ../../../values/internal/ingress-bootstrap/values-{{cluster}}.yaml
