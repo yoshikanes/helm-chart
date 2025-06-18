@@ -1,8 +1,6 @@
-istio_namespace: "istio-system"
 auth:
   strategy: "anonymous"
 deployment:
-  cluster_wide_access: true
   ingress:
     enabled: true
     class_name: "native-ic-ingress-class"
@@ -25,7 +23,6 @@ deployment:
                     name: kiali
                     port:
                       number: 20001
-  replicas: 1
   resources:
     requests:
       cpu: "100m"
