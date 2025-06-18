@@ -1,12 +1,6 @@
-_internal_defaults_do_not_set:
-  name: "istio-eastwestgateway"
-  kind: Deployment
-  networkGateway: "network1"
-
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 150m
-      memory: 192Mi
+name: "istio-eastwestgateway"
+networkGateway: "network1"
+resources:
+  limits:
+    cpu: 150m
+    memory: 192Mi
