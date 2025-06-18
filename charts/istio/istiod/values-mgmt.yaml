@@ -119,4 +119,3 @@ _internal_defaults_do_not_set:
 
   base:
     enableIstioConfigCRDs: true
-    validationCABundle: ""
