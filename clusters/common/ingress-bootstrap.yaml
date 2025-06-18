@@ -25,7 +25,7 @@ spec:
         targetRevision: main
         helm:
           valueFiles:
-            - ../../../values/internal/ingress-bootstrap/values-{{cluster}}.yaml
+            - ../../values/internal/ingress-bootstrap/values-{{cluster}}.yaml
       syncPolicy:
         automated:
           prune: true
