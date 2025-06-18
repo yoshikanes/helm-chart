@@ -1,27 +1,36 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: ingress-controller-dev
+  name: ingress-controller
   namespace: argocd
 spec:
-  project: default
-  sources:
-    - repoURL: https://github.com/oracle/oci-native-ingress-controller.git
-      targetRevision: v1.4.2
-      path: helm/oci-native-ingress-controller
-      helm:
-        releaseName: oci-native-ingress-controller
-        valueFiles:
-          - $values/values/external/oci-native-ingress-controller/values-dev.yaml
-    - repoURL: https://github.com/yoshikanes/helm-chart.git
-      targetRevision: main
-      ref: values
-  destination:
-    server: https://152.70.103.225:6443
-    namespace: native-ingress-controller-system
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
+  generators:
+    - list:
+        elements:
+          - cluster: dev
+            url: https://152.70.103.225:6443
+  template:
+    metadata:
+      name: '{{cluster}}-ingress-controller'
+    spec:
+      project: default
+      sources:
+        - repoURL: https://github.com/oracle/oci-native-ingress-controller.git
+          targetRevision: v1.4.2
+          path: helm/oci-native-ingress-controller
+          helm:
+            releaseName: oci-native-ingress-controller
+            valueFiles:
+              - $values/values/external/oci-native-ingress-controller/values-{{cluster}}.yaml
+        - repoURL: https://github.com/yoshikanes/helm-chart.git
+          targetRevision: main
+          ref: values
+      destination:
+        server: '{{url}}'
+        namespace: native-ingress-controller-system
+      syncPolicy:
+        automated:
+          selfHeal: true
+          prune: true
+        syncOptions:
+          - CreateNamespace=true
