@@ -19,9 +19,6 @@ spec:
     server: https://kubernetes.default.svc
     namespace: thanos
   syncPolicy:
-    managedNamespaceMetadata:
-      labels:
-        istio-injection: enabled
     automated:
       selfHeal: true
       prune: true
