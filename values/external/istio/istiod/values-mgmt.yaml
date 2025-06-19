@@ -34,6 +34,7 @@ global:
       limits:
         cpu: 150m
         memory: 128Mi
+  externalIstiod: true
   meshID: "mesh1"
   multiCluster:
     enabled: true
