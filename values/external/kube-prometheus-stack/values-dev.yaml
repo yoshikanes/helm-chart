@@ -21,7 +21,7 @@ prometheus:
             compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
   thanosService:
     enabled: true
-extraObjects:
+extraManifests:
   - apiVersion: multicluster.x-k8s.io/v1alpha1
     kind: ServiceExport
     metadata:
