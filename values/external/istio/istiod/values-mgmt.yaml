@@ -7,6 +7,9 @@ resources:
     memory: 128Mi
 cni:
   enabled: true
+env:
+  ENABLE_MULTICLUSTER_HEADLESS: true
+  PILOT_ENABLE_EDS_FOR_HEADLESS_SERVICES: true
 global:
   proxy:
     logLevel: debug
