@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: mcs-api-crds
+  namespace: argocd
+spec:
+  generators:
+    - list:
+        elements:
+          - cluster: mgmt
+            url: https://kubernetes.default.svc
+          - cluster: dev
+            url: https://152.70.103.225:6443
+  template:
+    metadata:
+      name: '{{cluster}}-mcs-api-crds'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/kubernetes-sigs/mcs-api.git
+        targetRevision: v0.2.0
+        path: config/crds
+        destination:
+          recurse: true
+      destination:
+        server: '{{url}}'
+        namespace: kube-system
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
