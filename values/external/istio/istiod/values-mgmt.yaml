@@ -10,6 +10,10 @@ cni:
 env:
   ENABLE_MULTICLUSTER_HEADLESS: true
   PILOT_ENABLE_EDS_FOR_HEADLESS_SERVICES: true
+meshConfig:
+  defaultConfig:
+    proxyMetadata:
+      ISTIO_META_DNS_CAPTURE: true
 global:
   proxy:
     logLevel: debug
