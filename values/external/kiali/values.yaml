@@ -23,6 +23,8 @@ deployment:
                     name: kiali
                     port:
                       number: 20001
+        kubernetes_config:
+          cluster_name: cluster1
   resources:
     requests:
       cpu: "100m"
