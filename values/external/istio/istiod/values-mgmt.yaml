@@ -8,14 +8,6 @@ resources:
 cni:
   enabled: true
 global:
-  defaultResources:
-    requests:
-      cpu: 100m
-      memory: 64Mi
-    limits:
-      cpu: 150m
-      memory: 128Mi
-
   proxy:
     logLevel: debug
     resources:
@@ -34,12 +26,6 @@ global:
       limits:
         cpu: 150m
         memory: 128Mi
-  externalIstiod: true
-  meshID: "mesh1"
-  multiCluster:
-    enabled: true
-    clusterName: "cluster1"
-  network: "network1"
   waypoint:
     resources:
       requests:
@@ -48,3 +34,8 @@ global:
       limits:
         cpu: 150m
         memory: 128Mi
+  meshID: "mesh1"
+  multiCluster:
+    enabled: true
+    clusterName: "cluster1"
+  network: "network1"
