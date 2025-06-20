@@ -19,7 +19,7 @@ spec:
       source:
         repoURL: https://github.com/kubernetes-sigs/mcs-api.git
         targetRevision: v0.2.0
-        path: config/crds
+        path: config/crd
         destination:
           recurse: true
       destination:
