@@ -23,3 +23,9 @@ prometheus:
     enabled: true
     annotations:
       networking.istio.io/exportTo: "*"
+extraObjects:
+  - apiVersion: multicluster.x-k8s.io/v1alpha1
+    kind: ServiceExport
+    metadata:
+      name: dev-kube-prometheus-stack-thanos-discovery
+      namespace: monitoring
