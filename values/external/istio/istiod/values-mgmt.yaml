@@ -13,7 +13,7 @@ env:
 meshConfig:
   defaultConfig:
     proxyMetadata:
-      ISTIO_META_DNS_CAPTURE: true
+      ISTIO_META_DNS_CAPTURE: "true"
 global:
   proxy:
     logLevel: debug
