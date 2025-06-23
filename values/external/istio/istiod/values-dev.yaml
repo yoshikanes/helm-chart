@@ -1,3 +1,7 @@
+podAnnotations: 
+  proxy.istio.io/config: |
+    proxyMetadata:
+      ISTIO_META_DNS_CAPTURE: "true"
 resources:
   requests:
     cpu: 100m
