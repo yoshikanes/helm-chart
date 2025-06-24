@@ -1,0 +1,6 @@
+name: "istio-egressgateway-dev"
+networkGateway: "network1"
+resources:
+  limits:
+    cpu: 150m
+    memory: 192Mi
