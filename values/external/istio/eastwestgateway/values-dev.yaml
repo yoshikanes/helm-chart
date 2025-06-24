@@ -1,0 +1,6 @@
+name: "istio-eastwestgateway"
+networkGateway: "network2"
+resources:
+  limits:
+    cpu: 150m
+    memory: 192Mi

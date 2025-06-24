@@ -32,6 +32,16 @@ spec:
         server: '{{url}}'
         namespace: istio-system
       syncPolicy:
+        {{- if eq .cluster "mgmt" }}
+        managedNamespaceMetadata:
+          labels:
+            topology.istio.io/network: network1
+        {{- end }}
+        {{- if eq .cluster "dev" }}
+        managedNamespaceMetadata:
+          labels:
+            topology.istio.io/network: network2
+        {{- end }}
         automated:
           prune: true
           selfHeal: true

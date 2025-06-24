@@ -1,4 +1,4 @@
-name: "istio-ingressgateway-dev"
+name: "istio-eastwestgateway"
 networkGateway: "network1"
 resources:
   limits:
