@@ -15,12 +15,12 @@ spec:
             url: https://152.70.103.225:6443
   template:
     metadata:
-      name: '{{cluster}}-istio-istiod'
+      name: '{{cluster}}-istio-ingressgateway'
     spec:
       project: default
       sources:
         - repoURL: https://istio-release.storage.googleapis.com/charts
-          chart: istiod
+          chart: gateway
           targetRevision: 1.26.0
           helm:
             valueFiles:
