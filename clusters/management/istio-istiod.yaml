@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mgmt-istio-istiod
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts
+      chart: istiod
+      targetRevision: 1.26.0
+      helm:
+        valueFiles:
+          - $values/values/external/istio/istiod/values-mgmt.yaml
+    - repoURL: https://github.com/yoshikanes/helm-chart.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  syncPolicy:
+    managedNamespaceMetadata:
+      labels:
+        topology.istio.io/network: network1
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
