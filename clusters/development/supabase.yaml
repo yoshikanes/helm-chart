@@ -8,7 +8,7 @@ spec:
     sources:
         - repoURL: https://github.com/supabase-community/supabase-kubernetes.git
           path: charts/supabase
-          targetRevision: 0.1.3
+          targetRevision: main
           helm:
               valueFiles:
                   - $values/values/external/supabase/values.yaml
