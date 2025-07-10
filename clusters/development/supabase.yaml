@@ -5,7 +5,7 @@ metadata:
     namespace: argocd
 spec:
     project: default
-    source:
+    sources:
         - repoURL: https://github.com/supabase-community/supabase-kubernetes.git
           path: charts/supabase
           targetRevision: 0.1.3
