@@ -1,40 +1,40 @@
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: istio-eastwestgateway
-  namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-options: ServerSideApply=true
-spec:
-  generators:
-    - list:
-        elements:
-          - cluster: mgmt
-            url: https://kubernetes.default.svc
-          - cluster: dev
-            url: https://152.70.103.225:6443
-  template:
-    metadata:
-      name: '{{cluster}}-istio-eastwestgateway'
-    spec:
-      project: default
-      sources:
-        - repoURL: https://istio-release.storage.googleapis.com/charts
-          chart: gateway
-          targetRevision: 1.26.0
-          helm:
-            valueFiles:
-              - $values/values/external/istio/eastwestgateway/values-{{cluster}}.yaml
-        - repoURL: https://github.com/yoshikanes/helm-chart.git
-          targetRevision: main
-          ref: values
-      destination:
-        server: '{{url}}'
-        namespace: istio-system
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: true
-        syncOptions:
-          - CreateNamespace=true
-          - ServerSideApply=true
+# apiVersion: argoproj.io/v1alpha1
+# kind: ApplicationSet
+# metadata:
+#   name: istio-eastwestgateway
+#   namespace: argocd
+#   annotations:
+#     argocd.argoproj.io/sync-options: ServerSideApply=true
+# spec:
+#   generators:
+#     - list:
+#         elements:
+#           - cluster: mgmt
+#             url: https://kubernetes.default.svc
+#           - cluster: dev
+#             url: https://152.70.103.225:6443
+#   template:
+#     metadata:
+#       name: '{{cluster}}-istio-eastwestgateway'
+#     spec:
+#       project: default
+#       sources:
+#         - repoURL: https://istio-release.storage.googleapis.com/charts
+#           chart: gateway
+#           targetRevision: 1.26.0
+#           helm:
+#             valueFiles:
+#               - $values/values/external/istio/eastwestgateway/values-{{cluster}}.yaml
+#         - repoURL: https://github.com/yoshikanes/helm-chart.git
+#           targetRevision: main
+#           ref: values
+#       destination:
+#         server: '{{url}}'
+#         namespace: istio-system
+#       syncPolicy:
+#         automated:
+#           prune: true
+#           selfHeal: true
+#         syncOptions:
+#           - CreateNamespace=true
+#           - ServerSideApply=true
