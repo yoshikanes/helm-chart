@@ -49,6 +49,7 @@ auth:
     tag: v2.143.0
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
     API_EXTERNAL_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_SITE_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
@@ -63,6 +64,7 @@ rest:
     tag: v12.0.1
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
 
 realtime:
   image:
@@ -74,12 +76,14 @@ realtime:
     initialDelaySeconds: 3
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
 
 meta:
   image:
     tag: v0.80.0
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
 
 storage:
   image:
@@ -91,6 +95,7 @@ storage:
     initialDelaySeconds: 3
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
   persistence:
     enabled: false #本番環境ではtrueにする
 
@@ -164,3 +169,4 @@ functions:
     tag: v1.41.2
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_SSL: "require"
