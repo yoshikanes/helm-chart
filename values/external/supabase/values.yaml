@@ -1,7 +1,3 @@
-global:
-  environment:
-    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
-
 secret:
   jwt:
     anonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
@@ -52,6 +48,7 @@ auth:
   image:
     tag: v2.143.0
   environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     API_EXTERNAL_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_SITE_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
@@ -64,6 +61,8 @@ auth:
 rest:
   image:
     tag: v12.0.1
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
 
 realtime:
   image:
@@ -73,10 +72,14 @@ realtime:
       path: /
       port: 4000
     initialDelaySeconds: 3
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
 
 meta:
   image:
     tag: v0.80.0
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
 
 storage:
   image:
@@ -86,6 +89,8 @@ storage:
       path: /status
       port: 5000
     initialDelaySeconds: 3
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
   persistence:
     enabled: false #本番環境ではtrueにする
 
@@ -135,6 +140,8 @@ analytics:
       path: /health
       port: 4000
     initialDelaySeconds: 3
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
 
 vector:
   image:
@@ -155,3 +162,5 @@ vector:
 functions:
   image:
     tag: v1.41.2
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
