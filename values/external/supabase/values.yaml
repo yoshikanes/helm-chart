@@ -12,7 +12,7 @@ secret:
   db:
     username: admin
     password: zG96uXB#
-    database: testing-postgresql
+    database: postgres
   analytics:
     apiKey: be334195618a822311835f10fc353d3844a98563e39c18a2102be70e1ad1e9cd
 
