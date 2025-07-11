@@ -110,6 +110,7 @@ kong:
     enabled: true
     className: "native-ic-ingress-class"
     annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: null
         healthCheckProtocol: "HTTP"
         healthCheckPort: "3000"
         healthCheckPath: "/api/profile"
