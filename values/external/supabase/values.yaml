@@ -1,3 +1,5 @@
+postgresql:
+  host: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
 secret:
   jwt:
     anonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
@@ -10,9 +12,9 @@ secret:
     username: admin
     password: supabasepass
   db:
-    username: postgres
-    password: postgrespass
-    database: postgres
+    username: admin
+    password: zG96uXB#
+    database: testing-postgresql
   analytics:
     apiKey: be334195618a822311835f10fc353d3844a98563e39c18a2102be70e1ad1e9cd
 
