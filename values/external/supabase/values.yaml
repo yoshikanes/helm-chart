@@ -144,6 +144,8 @@ analytics:
       path: /health
       port: 4000
     initialDelaySeconds: 3
+  environment:
+    DATABASE_URL: "postgres://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?ssl=true"
 
 vector:
   image:
