@@ -1,17 +1,3 @@
-global:
-  environment:
-    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
-    DB_USER: admin
-    DB_SSL: "require"
-    DB_NAME: postgres
-    DB_PASSWORD: zG96uXB#
-    GOTRUE_DATABASE_URL: "postgres://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
-    GOTRUE_JWT_SECRET: 2e6ef68c02b7b8df1242625cdd36265b692329a31d968d82b1326be7a8b49043
-    PGRST_DB_URI: "postgres://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
-    POSTGREST_URL: "http://supabase-rest-api:3000"
-    REALTIME_POSTGRES_OPTS: "?sslmode=require"
-
-
 secret:
   jwt:
     anonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE
@@ -32,17 +18,17 @@ secret:
 
 db:
   enabled: false #外部DBを使用する場合はfalseにする
-  image:
-    tag: 15.1.0.147
-  livenessProbe:
-    exec:
-      command:
-        - pg_isready
-        - -U
-        - postgres
-    initialDelaySeconds: 3
-  persistence:
-    enabled: false #本番環境ではtrueにする
+  # image:
+  #   tag: 15.1.0.147
+  # livenessProbe:
+  #   exec:
+  #     command:
+  #       - pg_isready
+  #       - -U
+  #       - postgres
+  #   initialDelaySeconds: 3
+  # persistence:
+  #   enabled: false #本番環境ではtrueにする
 
 studio:
   image:
@@ -62,6 +48,9 @@ auth:
   image:
     tag: v2.143.0
   environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
     API_EXTERNAL_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_SITE_URL: https://supabase.dev.ec-gaihan-development.com/
     GOTRUE_EXTERNAL_EMAIL_ENABLED: "true"
@@ -74,6 +63,10 @@ auth:
 rest:
   image:
     tag: v12.0.1
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
 
 realtime:
   image:
@@ -83,10 +76,18 @@ realtime:
       path: /
       port: 4000
     initialDelaySeconds: 3
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
 
 meta:
   image:
     tag: v0.80.0
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
 
 storage:
   image:
@@ -98,6 +99,10 @@ storage:
     initialDelaySeconds: 3
   persistence:
     enabled: false #本番環境ではtrueにする
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
 
 imgproxy:
   image:
@@ -146,12 +151,9 @@ analytics:
       port: 4000
     initialDelaySeconds: 3
   environment:
-    POSTGRES_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
-    POSTGRES_USER: "admin"
-    POSTGRES_PASSWORD: "zG96uXB#"
-    POSTGRES_DB: "postgres"
-    POSTGRES_PORT: 5432
-    LOGFLARE_DB_SSL: "true"
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
 
 vector:
   image:
@@ -172,3 +174,7 @@ vector:
 functions:
   image:
     tag: v1.41.2
+  environment:
+    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
+    DB_SSL: "require"
