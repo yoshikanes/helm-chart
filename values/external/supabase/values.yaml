@@ -5,10 +5,11 @@ global:
     DB_SSL: "require"
     DB_NAME: postgres
     DB_PASSWORD: zG96uXB#
-    GOTRUE_DATABASE_URL: "postgres://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres"
+    GOTRUE_DATABASE_URL: "postgres://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
     GOTRUE_JWT_SECRET: 2e6ef68c02b7b8df1242625cdd36265b692329a31d968d82b1326be7a8b49043
-    PGRST_DB_URI: "postgres://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres"
+    PGRST_DB_URI: "postgres://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
     POSTGREST_URL: "http://supabase-rest-api:3000"
+    REALTIME_POSTGRES_OPTS: "?sslmode=require"
 
 
 secret:
@@ -145,7 +146,12 @@ analytics:
       port: 4000
     initialDelaySeconds: 3
   environment:
-    DATABASE_URL: "postgres://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?ssl=true"
+    POSTGRES_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    POSTGRES_USER: "admin"
+    POSTGRES_PASSWORD: "zG96uXB#"
+    POSTGRES_DB: "postgres"
+    POSTGRES_PORT: 5432
+    LOGFLARE_DB_SSL: "true"
 
 vector:
   image:
