@@ -79,7 +79,7 @@ realtime:
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
-    DB_PORT: "5432"
+    DB_PORT: 5432
     DB_PASSWORD: "zG96uXB#"
     DB_NAME: "postgres"
     DB_SSL: "true"
@@ -162,7 +162,7 @@ analytics:
     LOGFLARE_DB_SSL: "true"
     POSTGRES_BACKEND_URL: "postgresql://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?ssl=true"
     LOGFLARE_DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
-    LOGFLARE_DB_PORT: "5432"
+    LOGFLARE_DB_PORT: 5432
     LOGFLARE_DB_USER: "admin"
     LOGFLARE_DB_PASSWORD: "zG96uXB#"
     LOGFLARE_DB_NAME: "postgres"
