@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+    name: supabase
+    namespace: argocd
+spec:
+    project: default
+    sources:
+        - repoURL: https://github.com/supabase-community/supabase-kubernetes.git
+          path: charts/supabase
+          targetRevision: main
+          helm:
+              valueFiles:
+                  - $values/values/external/supabase/values.yaml
+        - repoURL: https://github.com/yoshikanes/helm-chart.git
+          targetRevision: main
+          ref: values
+    destination:
+      server: https://152.70.103.225:6443
+      namespace: supabase
+    syncPolicy:
+      automated:
+        selfHeal: true
+        prune: true
+      syncOptions:
+        - CreateNamespace=true
