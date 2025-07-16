@@ -80,7 +80,6 @@ realtime:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
     DB_SSL: "require"
-    DATABASE_URL: "postgresql://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
 
 meta:
   image:
@@ -156,7 +155,7 @@ analytics:
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USERNAME: "admin"
-    DATABASE_URL: "postgresql://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
+    DATABASE_URL: "postgresql://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
 
 vector:
   image:
