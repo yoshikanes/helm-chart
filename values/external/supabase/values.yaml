@@ -158,20 +158,21 @@ analytics:
   #   DB_USERNAME: "admin"
 
 vector:
-  image:
-    tag: 0.34.0-alpine
-  livenessProbe:
-    httpGet:
-      path: /health
-      port: 9001
-    initialDelaySeconds: 3
-  volumeMounts:
-    - name: pod-logs
-      mountPath: /var/log/pods
-  volumes:
-    - name: pod-logs
-      hostPath:
-        path: /var/log/pods
+  enabled: false #analyticsに依存しているため無効化
+  # image:
+  #   tag: 0.34.0-alpine
+  # livenessProbe:
+  #   httpGet:
+  #     path: /health
+  #     port: 9001
+  #   initialDelaySeconds: 3
+  # volumeMounts:
+  #   - name: pod-logs
+  #     mountPath: /var/log/pods
+  # volumes:
+  #   - name: pod-logs
+  #     hostPath:
+  #       path: /var/log/pods
 
 functions:
   image:
