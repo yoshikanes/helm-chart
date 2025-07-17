@@ -70,7 +70,7 @@ rest:
 
 realtime:
   image:
-    tag: v2.41.1
+    tag: v2.27.5
   livenessProbe:
     httpGet:
       path: /
@@ -80,7 +80,6 @@ realtime:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
     DB_SSL: "require"
-    APP_NAME: "realtime"
 
 meta:
   image:
