@@ -145,17 +145,17 @@ kong:
             pathType: Prefix
 
 analytics:
-  image:
-    tag: 1.4.0
-  livenessProbe:
-    httpGet:
-      path: /health
-      port: 4000
-    initialDelaySeconds: 3
-  environment:
-    DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
-    DB_USERNAME: "admin"
-    DATABASE_URL: "postgresql://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
+  enabled: false #外部DBでは使用出来ないようなので無効化
+  # image:
+  #   tag: 1.4.0
+  # livenessProbe:
+  #   httpGet:
+  #     path: /health
+  #     port: 4000
+  #   initialDelaySeconds: 3
+  # environment:
+  #   DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+  #   DB_USERNAME: "admin"
 
 vector:
   image:
