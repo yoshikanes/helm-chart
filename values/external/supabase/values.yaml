@@ -82,7 +82,6 @@ realtime:
     DB_SSL: "require"
     DB_PORT: "5432"
     DB_NAME: "postgres"
-    DB_PASSWORD: "zG96uXB#"
     DB_SSL_MODE: "require"
 
 meta:
