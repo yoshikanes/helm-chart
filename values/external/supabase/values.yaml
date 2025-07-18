@@ -84,9 +84,6 @@ realtime:
     DB_SSL_MODE: "require"
     DB_SSL_VERIFY: "false"
     PGSSLMODE: "require"
-    PGSSLCERT: ""  # 証明書不要
-    PGSSLKEY: ""   # キー不要
-    PGSSLROOTCERT: ""  # ルート証明書不要
     NODE_TLS_REJECT_UNAUTHORIZED: "0"
 
 meta:
