@@ -6,7 +6,6 @@ objstoreConfig:
     compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
 receive:
   enabled: true
-  replicaCount: 3
   config: |-
     [
       {
@@ -22,6 +21,5 @@ receive:
     type: LoadBalancer
     annotations:
       oci.oraclecloud.com/load-balancer-type: "nlb"
-      oci-network-load-balancer.oraclecloud.com/internal: "true"
 storegateway:
   enabled: true
