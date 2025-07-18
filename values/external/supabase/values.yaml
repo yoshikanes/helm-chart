@@ -82,6 +82,7 @@ realtime:
     DB_SSL: "require"
     ssl: "true"
     ssl_opts: "verify_none"
+    DATABASE_URL: "postgresql://admin:zG96uXB#@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?ssl=true"
 
 meta:
   image:
