@@ -75,7 +75,7 @@ realtime:
     httpGet:
       path: /
       port: 4000
-    initialDelaySeconds: 3
+    initialDelaySeconds: 600
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
