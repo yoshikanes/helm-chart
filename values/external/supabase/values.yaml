@@ -79,16 +79,10 @@ realtime:
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
-    DB_SSL: "true"
+    DB_SSL: "require"
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
     DB_SSL_VERIFY: "false"
-    SECURE_CHANNELS: "true"
-    SLOT_NAME: "supabase_realtime_slot"
-    TEMPORARY_SLOT: "true"
-    PGSSLMODE: "require"
-    PGREQUIRESSL: "1"
-    DB_CONN_URL: "postgres://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
 meta:
   image:
     tag: v0.80.0
