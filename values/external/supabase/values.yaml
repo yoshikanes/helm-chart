@@ -81,7 +81,8 @@ realtime:
     DB_USER: "admin"
     DB_SSL: "require"
     ssl: "true"
-    ssl_opts: "verify_none"
+    ssl_opts:
+      verify: "verify_none"
     rds.force_ssl: "0"
 
 meta:
