@@ -83,6 +83,11 @@ realtime:
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
     DB_SSL_VERIFY: "false"
+    SECURE_CHANNELS: "true"
+    SLOT_NAME: "supabase_realtime_slot"
+    TEMPORARY_SLOT: "true"
+    PGSSLMODE: "require"
+    PGREQUIRESSL: "1"
 
 meta:
   image:
