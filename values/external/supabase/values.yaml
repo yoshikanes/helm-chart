@@ -81,7 +81,6 @@ realtime:
     DB_USER: "admin"
     DB_SSL: "require"
     DB_PORT: "5432"
-    DB_NAME: "postgres"
     DB_SSL_MODE: "require"
 
 meta:
