@@ -80,6 +80,8 @@ realtime:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
     DB_SSL: "require"
+    ssl: "true"
+    ssl_opts: [verify: :verify_none]
 
 meta:
   image:
