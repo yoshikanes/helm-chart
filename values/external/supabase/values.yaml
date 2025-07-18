@@ -83,6 +83,9 @@ realtime:
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
     DB_SSL_VERIFY: "false"
+    PGSSLMODE: "require"
+    NODE_TLS_REJECT_UNAUTHORIZED: "0"
+
 meta:
   image:
     tag: v0.80.0
