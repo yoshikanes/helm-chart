@@ -82,7 +82,7 @@ realtime:
     DB_SSL: "require"
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
-    DATABASE_URL: "postgresql://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?sslmode=require"
+    DATABASE_URL: "postgresql://admin:zG96uXB%23@primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com:5432/postgres?ssl=true"
 
 meta:
   image:
