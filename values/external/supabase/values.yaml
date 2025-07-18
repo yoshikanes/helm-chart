@@ -80,7 +80,7 @@ realtime:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
     DB_USER: "admin"
     DB_SSL: "require"
-    DB_PORT: "4000"
+    DB_PORT: "5432"
     DB_SSL_MODE: "require"
     DB_SSL_VERIFY: "false"
     PGSSLMODE: "require"
