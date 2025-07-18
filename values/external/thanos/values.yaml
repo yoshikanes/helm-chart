@@ -7,6 +7,15 @@ objstoreConfig:
 receive:
   enabled: true
   replicaCount: 3
+  # Readiness and liveness probes
+  livenessProbe:
+    httpGet:
+      path: /-/healthy
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /-/ready
+      port: http
   config: |-
     [
       {
@@ -24,11 +33,10 @@ receive:
       oci.oraclecloud.com/load-balancer-type: "nlb"
       service.beta.kubernetes.io/oci-load-balancer-internal: "true"   
       service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
-    grpc:
-      port: 10901
-    http:
-      port: 10902
-    remote:
-      port: 19291
+      service.beta.kubernetes.io/oci-load-balancer-shape-flex-min: "10"
+      service.beta.kubernetes.io/oci-load-balancer-shape-flex-max: "100"
+      oci.oraclecloud.com/healthcheck-protocol: "HTTP"
+      oci.oraclecloud.com/healthcheck-port: "10902"
+      oci.oraclecloud.com/healthcheck-path: "/-/healthy"
 storegateway:
   enabled: true
