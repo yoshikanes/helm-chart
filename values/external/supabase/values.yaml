@@ -81,7 +81,6 @@ realtime:
     DB_USER: "admin"
     DB_SSL: "require"
     DB_PORT: "5432"
-    RLIMIT_NOFILE: "10000"
     APP_NAME: "realtime"
     SEED_SELF_HOST: "true"
 
