@@ -17,18 +17,18 @@ secret:
     apiKey: be334195618a822311835f10fc353d3844a98563e39c18a2102be70e1ad1e9cd
 
 db:
-  enabled: false #外部DBを使用する場合はfalseにする
-  # image:
-  #   tag: 15.1.0.147
-  # livenessProbe:
-  #   exec:
-  #     command:
-  #       - pg_isready
-  #       - -U
-  #       - postgres
-  #   initialDelaySeconds: 3
-  # persistence:
-  #   enabled: false #本番環境ではtrueにする
+  enabled: true #外部DBを使用する場合はfalseにする
+  image:
+    tag: 15.1.0.147
+  livenessProbe:
+    exec:
+      command:
+        - pg_isready
+        - -U
+        - postgres
+    initialDelaySeconds: 3
+  persistence:
+    enabled: false #本番環境ではtrueにする
 
 studio:
   image:
