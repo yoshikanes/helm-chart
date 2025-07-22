@@ -70,7 +70,7 @@ rest:
 
 realtime:
   image:
-    tag: v2.41.3
+    tag: v2.34.47
   livenessProbe:
     httpGet:
       path: /
@@ -78,6 +78,7 @@ realtime:
     initialDelaySeconds: 3
   environment:
     DB_HOST: "primary.z7rgd7dbag4mxf52n2fykieftmgreq.postgresql.ap-tokyo-1.oci.oraclecloud.com"
+    DB_USER: "admin"
     DB_SSL: "require"
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
@@ -85,6 +86,7 @@ realtime:
     DB_SSL_VERIFY: "false"
     PGSSLMODE: "require"
     NODE_TLS_REJECT_UNAUTHORIZED: "0"
+    SEED_SELF_HOST: "true"
 
 meta:
   image:
