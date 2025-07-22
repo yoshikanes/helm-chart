@@ -70,7 +70,7 @@ rest:
 
 realtime:
   image:
-    tag: v2.27.5
+    tag: v2.41.3
   livenessProbe:
     httpGet:
       path: /
@@ -81,6 +81,7 @@ realtime:
     DB_SSL: "require"
     DB_PORT: "5432"
     DB_SSL_MODE: "require"
+    APP_NAME: "realtime"
     DB_SSL_VERIFY: "false"
     PGSSLMODE: "require"
     NODE_TLS_REJECT_UNAUTHORIZED: "0"
