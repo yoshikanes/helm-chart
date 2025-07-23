@@ -4,22 +4,9 @@ objstoreConfig:
     provider: "instance-principal"
     bucket: "thanos-metrics-storage"
     compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
-receive:
-  enabled: true
-  config: |-
-    [
-      {
-        "tenant_id": "management",
-        "forward_to": []
-      },
-      {
-        "tenant_id": "development",
-        "forward_to": []
-      }
-    ]
-  service:
-    type: LoadBalancer
-    annotations:
-      oci.oraclecloud.com/load-balancer-type: "nlb"
+query:
+  stores:
+    - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
+    - "dnssrv+_grpc._tcp.dev-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
 storegateway:
   enabled: true
