@@ -16,8 +16,6 @@ grafana:
 prometheus:
   prometheusSpec:
     podMetadata:
-      labels:
-        sidecar.istio.io/inject: "true"
     externalLabels:
       cluster: management
     thanos:
