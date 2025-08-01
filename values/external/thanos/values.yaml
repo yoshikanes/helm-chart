@@ -10,3 +10,4 @@ query:
     - "10.0.10.34:30901"
 storegateway:
   enabled: true
+  resourcesPreset: "small"
