@@ -22,3 +22,4 @@ prometheus:
   thanosService:
     enabled: true
     type: NodePort
+    clusterIP: ""
