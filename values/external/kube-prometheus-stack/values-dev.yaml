@@ -18,5 +18,10 @@ prometheus:
             compartment_ocid: "ocid1.compartment.oc1..aaaaaaaagmkqp2efcynmjicfgucpd4b3i6mzurw3ndfjy7my7qajy32dmhkq"
   thanosService:
     enabled: true
+    annotations:
+      argocd.argoproj.io/ignore-diff: |
+        - jsonPointers:
+          - /spec/clusterIP
+          - /spec/clusterIPs
     type: NodePort
     clusterIP: ""
