@@ -1,0 +1,61 @@
+loki:
+  persistence:
+    enabled: true
+    size: 10Gi
+  serviceMonitor:
+    enabled: true
+  config:
+    auth_enabled: false
+    ingester:
+      chunk_idle_period: 3m
+      chunk_block_size: 262144
+      chunk_retain_period: 1m
+      max_transfer_retries: 0
+      wal:
+        enabled: true
+        dir: /data/loki/wal
+    limits_config:
+      enforce_metric_name: false
+      reject_old_samples: true
+      reject_old_samples_max_age: 168h
+      max_entries_limit_per_query: 5000
+      max_query_series: 5000
+      max_query_parallelism: 32
+    schema_config:
+      configs:
+        - from: 2020-10-24
+          store: boltdb-shipper
+          object_store: filesystem
+          schema: v11
+          index:
+            prefix: index_
+            period: 24h
+    server:
+      grpc_listen_port: 9095
+    storage_config:
+      boltdb_shipper:
+        active_index_directory: /data/loki/boltdb-shipper-active
+        cache_location: /data/loki/boltdb-shipper-cache
+        cache_ttl: 24h
+        shared_store: filesystem
+      filesystem:
+        directory: /data/loki/chunks
+    chunk_store_config:
+      max_look_back_period: 0s
+    table_manager:
+      retention_deletes_enabled: false
+      retention_period: 0s
+    compactor:
+      working_directory: /data/loki/boltdb-shipper-compactor
+      shared_store: filesystem
+  ingress:
+    enabled: true
+    annotations:
+      oci-native-ingress.oraclecloud.com/certificate-ocid: "ocid1.certificate.oc1.ap-tokyo-1.amaaaaaa5plvdeia7kgvokkxpmee6s6v2opcur6jah223vk6b34z5dyhqrqq"
+      oci-native-ingress.oraclecloud.com/backend-tls-enabled: "false"
+      oci-native-ingress.oraclecloud.com/https-listener-port: "443"
+    ingressClassName: native-ic-ingress-class
+    hosts:
+      - host: loki.dev.ec-gaihan-development.com
+        paths:
+          - /
