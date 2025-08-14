@@ -13,6 +13,16 @@ grafana:
       oci-native-ingress.oraclecloud.com/https-listener-port: "443"
     hosts:
       - grafana.dev.ec-gaihan-development.com
+  additionalDataSources:
+    - name: Loki
+      type: loki
+      access: proxy
+      url: http://loki-stack.logging.svc.cluster.local:3100
+      version: 1
+      isDefault: false
+      jsonData:
+        maxLines: 1000
+      editable: false
 prometheus:
   prometheusSpec:
     externalLabels:
