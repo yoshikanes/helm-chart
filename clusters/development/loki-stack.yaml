@@ -5,16 +5,10 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-    - repoURL: https://grafana.github.io/helm-charts
-      chart: loki-stack
-      targetRevision: 2.10.2
-      helm:
-        valueFiles:
-          - $values/values/external/loki-stack/values-dev.yaml
-    - repoURL: https://github.com/yoshikanes/helm-chart.git
-      targetRevision: main
-      ref: values
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: loki-stack
+    targetRevision: 2.10.2
   destination:
     server: https://152.70.103.225:6443
     namespace: logging

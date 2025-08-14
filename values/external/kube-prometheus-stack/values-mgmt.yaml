@@ -15,7 +15,6 @@ grafana:
       - grafana.mgmt.ec-gaihan-development.com
 prometheus:
   prometheusSpec:
-    podMetadata:
     externalLabels:
       cluster: management
     thanos:

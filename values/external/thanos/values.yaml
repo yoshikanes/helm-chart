@@ -7,7 +7,6 @@ objstoreConfig:
 query:
   stores:
     - "dnssrv+_grpc._tcp.mgmt-kube-prometheus-stack-thanos-discovery.monitoring.svc.cluster.local"
-    - "10.0.10.34:30901"
 storegateway:
   enabled: true
   resourcesPreset: "small"
